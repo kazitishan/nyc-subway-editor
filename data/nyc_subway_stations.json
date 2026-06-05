@@ -1,0 +1,5045 @@
+[
+  {
+    "name": "Times Sq–42 St",
+    "borough": "Manhattan",
+    "lines": [
+      "1",
+      "2",
+      "3",
+      "7",
+      "N",
+      "Q",
+      "R",
+      "W",
+      "S"
+    ],
+    "transfers": [
+      "1",
+      "2",
+      "3",
+      "7",
+      "N",
+      "Q",
+      "R",
+      "W",
+      "S",
+      "A",
+      "C",
+      "E"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "Grand Central–42 St",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5",
+      "6",
+      "7",
+      "S"
+    ],
+    "transfers": [
+      "4",
+      "5",
+      "6",
+      "7",
+      "S"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "34 St–Herald Square",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "D",
+      "F",
+      "M",
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "B",
+      "D",
+      "F",
+      "M",
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "34 St–Penn Station (A/C/E)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "E"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "E",
+      "1",
+      "2",
+      "3"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "34 St–Penn Station (1/2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "1",
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "1",
+      "2",
+      "3",
+      "A",
+      "C",
+      "E"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "42 St–Bryant Park / 5 Av",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "D",
+      "F",
+      "M",
+      "7"
+    ],
+    "transfers": [
+      "B",
+      "D",
+      "F",
+      "M",
+      "7"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "42 St–Port Authority",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "E"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "Fulton St",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "J",
+      "Z",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "J",
+      "Z",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "14 St–Union Square",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5",
+      "6",
+      "L",
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "4",
+      "5",
+      "6",
+      "L",
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Union Square"
+  },
+  {
+    "name": "59 St–Columbus Circle",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "1"
+    ],
+    "transfers": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "1"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "Atlantic Av–Barclays Ctr",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "D",
+      "N",
+      "Q",
+      "R",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "B",
+      "D",
+      "N",
+      "Q",
+      "R",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "neighborhood": "Prospect Heights"
+  },
+  {
+    "name": "Jay St–MetroTech",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C",
+      "F",
+      "R"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "F",
+      "R"
+    ],
+    "neighborhood": "Downtown Brooklyn"
+  },
+  {
+    "name": "DeKalb Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "D",
+      "N",
+      "Q",
+      "R"
+    ],
+    "transfers": [
+      "B",
+      "D",
+      "N",
+      "Q",
+      "R"
+    ],
+    "neighborhood": "Downtown Brooklyn"
+  },
+  {
+    "name": "Hoyt-Schermerhorn Sts",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C",
+      "G"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "G"
+    ],
+    "neighborhood": "Boerum Hill"
+  },
+  {
+    "name": "Court Sq–23 St",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "M",
+      "G",
+      "7"
+    ],
+    "transfers": [
+      "E",
+      "M",
+      "G",
+      "7"
+    ],
+    "neighborhood": "Long Island City"
+  },
+  {
+    "name": "Jackson Hts–Roosevelt Av",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "F",
+      "M",
+      "R",
+      "7"
+    ],
+    "transfers": [
+      "E",
+      "F",
+      "M",
+      "R",
+      "7"
+    ],
+    "neighborhood": "Jackson Heights"
+  },
+  {
+    "name": "Jamaica Ctr–Parsons/Archer",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "E",
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Howard Beach–JFK Airport",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A",
+      "AirTrain"
+    ],
+    "neighborhood": "Howard Beach"
+  },
+  {
+    "name": "Jamaica–Van Wyck",
+    "borough": "Queens",
+    "lines": [
+      "E"
+    ],
+    "transfers": [
+      "E",
+      "AirTrain"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "161 St–Yankee Stadium",
+    "borough": "The Bronx",
+    "lines": [
+      "B",
+      "D",
+      "4"
+    ],
+    "transfers": [
+      "B",
+      "D",
+      "4"
+    ],
+    "neighborhood": "Highbridge"
+  },
+  {
+    "name": "149 St–Grand Concourse",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "4",
+      "5"
+    ],
+    "neighborhood": "Mott Haven"
+  },
+  {
+    "name": "125 St (A/B/C/D)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "transfers": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "125 St (4/5/6)",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5",
+      "6"
+    ],
+    "transfers": [
+      "4",
+      "5",
+      "6"
+    ],
+    "neighborhood": "East Harlem"
+  },
+  {
+    "name": "168 St–Washington Hts",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "1"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "1"
+    ],
+    "neighborhood": "Washington Heights"
+  },
+  {
+    "name": "Chambers St / WTC",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "E",
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "E",
+      "2",
+      "3"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Canal St (A/C/E)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "E"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "neighborhood": "SoHo"
+  },
+  {
+    "name": "Canal St (J/Z/N/Q/R/6)",
+    "borough": "Manhattan",
+    "lines": [
+      "J",
+      "Z",
+      "N",
+      "Q",
+      "R",
+      "6"
+    ],
+    "transfers": [
+      "J",
+      "Z",
+      "N",
+      "Q",
+      "R",
+      "6"
+    ],
+    "neighborhood": "Chinatown"
+  },
+  {
+    "name": "Broadway–Lafayette St / Bleecker St",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "D",
+      "F",
+      "M",
+      "6"
+    ],
+    "transfers": [
+      "B",
+      "D",
+      "F",
+      "M",
+      "6"
+    ],
+    "neighborhood": "Noho"
+  },
+  {
+    "name": "West 4 St–Wash Sq",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "M"
+    ],
+    "transfers": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "M"
+    ],
+    "neighborhood": "Greenwich Village"
+  },
+  {
+    "name": "14 St / 6 Av",
+    "borough": "Manhattan",
+    "lines": [
+      "1",
+      "2",
+      "3",
+      "F",
+      "M",
+      "L"
+    ],
+    "transfers": [
+      "1",
+      "2",
+      "3",
+      "F",
+      "M",
+      "L"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "14 St / 8 Av",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "E",
+      "L"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "E",
+      "L"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "Lexington Av / 51 St & 53 St",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5",
+      "6",
+      "E",
+      "M"
+    ],
+    "transfers": [
+      "4",
+      "5",
+      "6",
+      "E",
+      "M"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "47–50 Sts–Rockefeller Ctr",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "D",
+      "F",
+      "M"
+    ],
+    "transfers": [
+      "B",
+      "D",
+      "F",
+      "M"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "57 St–7 Av",
+    "borough": "Manhattan",
+    "lines": [
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "57 St",
+    "borough": "Manhattan",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "72 St (B/C)",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "C"
+    ],
+    "transfers": [
+      "B",
+      "C"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "72 St (1/2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "1",
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "1",
+      "2",
+      "3"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "86 St (4/5/6)",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5",
+      "6"
+    ],
+    "transfers": [
+      "4",
+      "5",
+      "6"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "96 St (4/5/6)",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5",
+      "6"
+    ],
+    "transfers": [
+      "4",
+      "5",
+      "6"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "145 St (A/B/C/D)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "transfers": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "Mets–Willets Pt",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7",
+      "LIRR"
+    ],
+    "neighborhood": "Flushing"
+  },
+  {
+    "name": "Flushing–Main St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7",
+      "LIRR"
+    ],
+    "neighborhood": "Flushing"
+  },
+  {
+    "name": "Woodhaven Blvd / Queens Blvd",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Rego Park"
+  },
+  {
+    "name": "Forest Hills–71 Av",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "F",
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "E",
+      "F",
+      "M",
+      "R"
+    ],
+    "neighborhood": "Forest Hills"
+  },
+  {
+    "name": "Jamaica–179 St",
+    "borough": "Queens",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Parsons Blvd",
+    "borough": "Queens",
+    "lines": [
+      "Z",
+      "J"
+    ],
+    "transfers": [
+      "Z",
+      "J"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Van Wyck Blvd",
+    "borough": "Queens",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Sutphin Blvd–Archer Av–JFK",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "E",
+      "J",
+      "Z",
+      "AirTrain"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Norwood–205 St",
+    "borough": "The Bronx",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Norwood"
+  },
+  {
+    "name": "Wakefield–241 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Wakefield"
+  },
+  {
+    "name": "Eastchester–Dyre Av",
+    "borough": "The Bronx",
+    "lines": [
+      "5"
+    ],
+    "transfers": [
+      "5"
+    ],
+    "neighborhood": "Eastchester"
+  },
+  {
+    "name": "Pelham Bay Park",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Pelham Bay"
+  },
+  {
+    "name": "Co-op City (3 stations)",
+    "borough": "The Bronx",
+    "lines": [
+      "5"
+    ],
+    "transfers": [
+      "5"
+    ],
+    "neighborhood": "Co-op City"
+  },
+  {
+    "name": "Woodlawn",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Woodlawn"
+  },
+  {
+    "name": "Gun Hill Rd (5)",
+    "borough": "The Bronx",
+    "lines": [
+      "5"
+    ],
+    "transfers": [
+      "5"
+    ],
+    "neighborhood": "Williamsbridge"
+  },
+  {
+    "name": "Gun Hill Rd (2)",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Baychester"
+  },
+  {
+    "name": "Nereid Av",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Wakefield"
+  },
+  {
+    "name": "233 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Wakefield"
+  },
+  {
+    "name": "225 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Williamsbridge"
+  },
+  {
+    "name": "219 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Williamsbridge"
+  },
+  {
+    "name": "White Plains Rd / 238 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Bronxdale"
+  },
+  {
+    "name": "Bronx Park East",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Bronx Park"
+  },
+  {
+    "name": "Pelham Pkwy",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Pelham Parkway"
+  },
+  {
+    "name": "Burke Av",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Allerton"
+  },
+  {
+    "name": "Allerton Av",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Allerton"
+  },
+  {
+    "name": "180 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Belmont"
+  },
+  {
+    "name": "174–175 Sts",
+    "borough": "The Bronx",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Tremont"
+  },
+  {
+    "name": "Tremont Av",
+    "borough": "The Bronx",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Tremont"
+  },
+  {
+    "name": "182–183 Sts",
+    "borough": "The Bronx",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Fordham"
+  },
+  {
+    "name": "Fordham Rd (4)",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Fordham"
+  },
+  {
+    "name": "Kingsbridge Rd (4)",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Kingsbridge"
+  },
+  {
+    "name": "Bedford Park Blvd–Lehman College",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Bedford Park"
+  },
+  {
+    "name": "Bedford Park Blvd (B/D)",
+    "borough": "The Bronx",
+    "lines": [
+      "B",
+      "D"
+    ],
+    "transfers": [
+      "B",
+      "D"
+    ],
+    "neighborhood": "Bedford Park"
+  },
+  {
+    "name": "Norwood–205 St",
+    "borough": "The Bronx",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Norwood"
+  },
+  {
+    "name": "Mosholu Pkwy",
+    "borough": "The Bronx",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Norwood"
+  },
+  {
+    "name": "Woodlawn (4)",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Woodlawn"
+  },
+  {
+    "name": "238 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Kingsbridge"
+  },
+  {
+    "name": "231 St",
+    "borough": "The Bronx",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Kingsbridge"
+  },
+  {
+    "name": "225 St (1)",
+    "borough": "The Bronx",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Marble Hill"
+  },
+  {
+    "name": "Marble Hill–225 St",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Marble Hill"
+  },
+  {
+    "name": "Van Cortlandt Pk–242 St",
+    "borough": "The Bronx",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Riverdale"
+  },
+  {
+    "name": "South Ferry / Whitehall St",
+    "borough": "Manhattan",
+    "lines": [
+      "1",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "1",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Rector St (1/2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "1",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "1",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Cortlandt St / WTC",
+    "borough": "Manhattan",
+    "lines": [
+      "R",
+      "W",
+      "1"
+    ],
+    "transfers": [
+      "R",
+      "W",
+      "1"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Park Place / City Hall",
+    "borough": "Manhattan",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Civic Center"
+  },
+  {
+    "name": "Borough Hall / Court St",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "R"
+    ],
+    "transfers": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "R"
+    ],
+    "neighborhood": "Downtown Brooklyn"
+  },
+  {
+    "name": "Nevins St",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "neighborhood": "Boerum Hill"
+  },
+  {
+    "name": "Eastern Pkwy–Brooklyn Museum",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Franklin Av (2/3/4/5/C)",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "C",
+      "S"
+    ],
+    "transfers": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "C",
+      "S"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Prospect Park",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "Q",
+      "S"
+    ],
+    "transfers": [
+      "B",
+      "Q",
+      "S"
+    ],
+    "neighborhood": "Prospect-Lefferts"
+  },
+  {
+    "name": "Church Av (B/Q)",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "Q"
+    ],
+    "transfers": [
+      "B",
+      "Q"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Newkirk Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "Q"
+    ],
+    "transfers": [
+      "B",
+      "Q"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Avenue H",
+    "borough": "Brooklyn",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Avenue J",
+    "borough": "Brooklyn",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Avenue M",
+    "borough": "Brooklyn",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Kings Hwy (B/Q)",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "Q"
+    ],
+    "transfers": [
+      "B",
+      "Q"
+    ],
+    "neighborhood": "Midwood"
+  },
+  {
+    "name": "Avenue U (Q)",
+    "borough": "Brooklyn",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Gravesend"
+  },
+  {
+    "name": "Neck Rd",
+    "borough": "Brooklyn",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Gravesend"
+  },
+  {
+    "name": "Sheepshead Bay",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "Q"
+    ],
+    "transfers": [
+      "B",
+      "Q"
+    ],
+    "neighborhood": "Sheepshead Bay"
+  },
+  {
+    "name": "Brighton Beach",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "Q"
+    ],
+    "transfers": [
+      "B",
+      "Q"
+    ],
+    "neighborhood": "Brighton Beach"
+  },
+  {
+    "name": "Ocean Pkwy",
+    "borough": "Brooklyn",
+    "lines": [
+      "B"
+    ],
+    "transfers": [
+      "B"
+    ],
+    "neighborhood": "Brighton Beach"
+  },
+  {
+    "name": "Coney Island–Stillwell Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "D",
+      "F",
+      "N",
+      "Q"
+    ],
+    "transfers": [
+      "D",
+      "F",
+      "N",
+      "Q"
+    ],
+    "neighborhood": "Coney Island"
+  },
+  {
+    "name": "Neptune Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Coney Island"
+  },
+  {
+    "name": "W 8 St–NY Aquarium",
+    "borough": "Brooklyn",
+    "lines": [
+      "D",
+      "F",
+      "N",
+      "Q"
+    ],
+    "transfers": [
+      "D",
+      "F",
+      "N",
+      "Q"
+    ],
+    "neighborhood": "Coney Island"
+  },
+  {
+    "name": "Bay Pkwy (D)",
+    "borough": "Brooklyn",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Bensonhurst"
+  },
+  {
+    "name": "25 Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Bensonhurst"
+  },
+  {
+    "name": "Bay 50 St",
+    "borough": "Brooklyn",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Bensonhurst"
+  },
+  {
+    "name": "New Utrecht Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "N"
+    ],
+    "transfers": [
+      "N"
+    ],
+    "neighborhood": "Borough Park"
+  },
+  {
+    "name": "86 St (N)",
+    "borough": "Brooklyn",
+    "lines": [
+      "N"
+    ],
+    "transfers": [
+      "N"
+    ],
+    "neighborhood": "Gravesend"
+  },
+  {
+    "name": "20 Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "N"
+    ],
+    "transfers": [
+      "N"
+    ],
+    "neighborhood": "Bensonhurst"
+  },
+  {
+    "name": "Fort Hamilton Pkwy (N)",
+    "borough": "Brooklyn",
+    "lines": [
+      "N"
+    ],
+    "transfers": [
+      "N"
+    ],
+    "neighborhood": "Borough Park"
+  },
+  {
+    "name": "Bay Ridge–95 St",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Bay Ridge"
+  },
+  {
+    "name": "Bay Ridge Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Bay Ridge"
+  },
+  {
+    "name": "95 St",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Bay Ridge"
+  },
+  {
+    "name": "4 Av–9 St",
+    "borough": "Brooklyn",
+    "lines": [
+      "F",
+      "G",
+      "R"
+    ],
+    "transfers": [
+      "F",
+      "G",
+      "R"
+    ],
+    "neighborhood": "Park Slope"
+  },
+  {
+    "name": "Smith–9 Sts",
+    "borough": "Brooklyn",
+    "lines": [
+      "F",
+      "G"
+    ],
+    "transfers": [
+      "F",
+      "G"
+    ],
+    "neighborhood": "Red Hook"
+  },
+  {
+    "name": "Carroll St",
+    "borough": "Brooklyn",
+    "lines": [
+      "F",
+      "G"
+    ],
+    "transfers": [
+      "F",
+      "G"
+    ],
+    "neighborhood": "Carroll Gardens"
+  },
+  {
+    "name": "Bergen St",
+    "borough": "Brooklyn",
+    "lines": [
+      "F",
+      "G"
+    ],
+    "transfers": [
+      "F",
+      "G"
+    ],
+    "neighborhood": "Boerum Hill"
+  },
+  {
+    "name": "7 Av (F/G)",
+    "borough": "Brooklyn",
+    "lines": [
+      "F",
+      "G"
+    ],
+    "transfers": [
+      "F",
+      "G"
+    ],
+    "neighborhood": "Park Slope"
+  },
+  {
+    "name": "15 St–Prospect Park",
+    "borough": "Brooklyn",
+    "lines": [
+      "F",
+      "G"
+    ],
+    "transfers": [
+      "F",
+      "G"
+    ],
+    "neighborhood": "Windsor Terrace"
+  },
+  {
+    "name": "Fort Hamilton Pkwy (F)",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Borough Park"
+  },
+  {
+    "name": "Church Av (F/G)",
+    "borough": "Brooklyn",
+    "lines": [
+      "F",
+      "G"
+    ],
+    "transfers": [
+      "F",
+      "G"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Ditmas Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "18 Av (F)",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Borough Park"
+  },
+  {
+    "name": "Avenue I",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Midwood"
+  },
+  {
+    "name": "Bay Pkwy (F)",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Bath Beach"
+  },
+  {
+    "name": "Avenue N",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Avenue P",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Kings Hwy (F)",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Midwood"
+  },
+  {
+    "name": "Avenue U (F)",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Gravesend"
+  },
+  {
+    "name": "Avenue X",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Gravesend"
+  },
+  {
+    "name": "Flushing Av (G)",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "Myrtle–Willoughby Avs",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Bedford–Nostrand Avs",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Bedford-Stuyvesant"
+  },
+  {
+    "name": "Classon Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Clinton Hill"
+  },
+  {
+    "name": "Clinton–Washington Avs",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Clinton Hill"
+  },
+  {
+    "name": "Fulton St (G)",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Bedford-Stuyvesant"
+  },
+  {
+    "name": "Nassau Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Greenpoint"
+  },
+  {
+    "name": "Greenpoint Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Greenpoint"
+  },
+  {
+    "name": "Metropolitan Av/Lorimer St",
+    "borough": "Brooklyn",
+    "lines": [
+      "G",
+      "L"
+    ],
+    "transfers": [
+      "G",
+      "L"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "First Av",
+    "borough": "Manhattan",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "East Village"
+  },
+  {
+    "name": "Third Av",
+    "borough": "Manhattan",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "East Village"
+  },
+  {
+    "name": "Union Sq–14 St (L)",
+    "borough": "Manhattan",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L",
+      "4",
+      "5",
+      "6",
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Union Square"
+  },
+  {
+    "name": "6 Av (L)",
+    "borough": "Manhattan",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "8 Av (L)",
+    "borough": "Manhattan",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "Bedford Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "Lorimer St",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "Graham Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "Grand St",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "East Williamsburg"
+  },
+  {
+    "name": "Montrose Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "East Williamsburg"
+  },
+  {
+    "name": "Morgan Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "East Williamsburg"
+  },
+  {
+    "name": "Jefferson St",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "DeKalb Av (L)",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Myrtle–Wyckoff Avs",
+    "borough": "Brooklyn",
+    "lines": [
+      "L",
+      "M"
+    ],
+    "transfers": [
+      "L",
+      "M"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Halsey St",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Wilson Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Bushwick Av–Aberdeen St",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Broadway Junction",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C",
+      "J",
+      "Z",
+      "L"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "J",
+      "Z",
+      "L"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Atlantic Av (L)",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "New Lots Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "East 105 St",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Canarsie"
+  },
+  {
+    "name": "Canarsie–Rockaway Pkwy",
+    "borough": "Brooklyn",
+    "lines": [
+      "L"
+    ],
+    "transfers": [
+      "L"
+    ],
+    "neighborhood": "Canarsie"
+  },
+  {
+    "name": "Euclid Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Van Siclen Av (A/C)",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Shepherd Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Liberty Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Ozone Park–Lefferts Blvd",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Ozone Park"
+  },
+  {
+    "name": "88 St–Boyd Av",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Ozone Park"
+  },
+  {
+    "name": "80 St–Hudson St",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Ozone Park"
+  },
+  {
+    "name": "Far Rockaway–Mott Av",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Far Rockaway"
+  },
+  {
+    "name": "Mott Av",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Far Rockaway"
+  },
+  {
+    "name": "Beach 25 St",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Far Rockaway"
+  },
+  {
+    "name": "Beach 44 St",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Arverne"
+  },
+  {
+    "name": "Beach 60 St",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Arverne"
+  },
+  {
+    "name": "Beach 67 St",
+    "borough": "Queens",
+    "lines": [
+      "A"
+    ],
+    "transfers": [
+      "A"
+    ],
+    "neighborhood": "Arverne"
+  },
+  {
+    "name": "Beach 90 St",
+    "borough": "Queens",
+    "lines": [
+      "A",
+      "S"
+    ],
+    "transfers": [
+      "A",
+      "S"
+    ],
+    "neighborhood": "Rockaway Beach"
+  },
+  {
+    "name": "Beach 98 St",
+    "borough": "Queens",
+    "lines": [
+      "A",
+      "S"
+    ],
+    "transfers": [
+      "A",
+      "S"
+    ],
+    "neighborhood": "Rockaway Beach"
+  },
+  {
+    "name": "Beach 105 St",
+    "borough": "Queens",
+    "lines": [
+      "A",
+      "S"
+    ],
+    "transfers": [
+      "A",
+      "S"
+    ],
+    "neighborhood": "Rockaway Park"
+  },
+  {
+    "name": "Rockaway Park–Beach 116 St",
+    "borough": "Queens",
+    "lines": [
+      "A",
+      "S"
+    ],
+    "transfers": [
+      "A",
+      "S"
+    ],
+    "neighborhood": "Rockaway Park"
+  },
+  {
+    "name": "Broad Channel",
+    "borough": "Queens",
+    "lines": [
+      "A",
+      "S"
+    ],
+    "transfers": [
+      "A",
+      "S"
+    ],
+    "neighborhood": "Broad Channel"
+  },
+  {
+    "name": "Astoria–Ditmars Blvd",
+    "borough": "Queens",
+    "lines": [
+      "N",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "W"
+    ],
+    "neighborhood": "Astoria"
+  },
+  {
+    "name": "Astoria Blvd",
+    "borough": "Queens",
+    "lines": [
+      "N",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "W"
+    ],
+    "neighborhood": "Astoria"
+  },
+  {
+    "name": "30 Av",
+    "borough": "Queens",
+    "lines": [
+      "N",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "W"
+    ],
+    "neighborhood": "Astoria"
+  },
+  {
+    "name": "Broadway (Queens)",
+    "borough": "Queens",
+    "lines": [
+      "N",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "W"
+    ],
+    "neighborhood": "Astoria"
+  },
+  {
+    "name": "36 Av",
+    "borough": "Queens",
+    "lines": [
+      "N",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "W"
+    ],
+    "neighborhood": "Astoria"
+  },
+  {
+    "name": "39 Av",
+    "borough": "Queens",
+    "lines": [
+      "N",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "W"
+    ],
+    "neighborhood": "Astoria"
+  },
+  {
+    "name": "Queensboro Plaza",
+    "borough": "Queens",
+    "lines": [
+      "N",
+      "W",
+      "7"
+    ],
+    "transfers": [
+      "N",
+      "W",
+      "7"
+    ],
+    "neighborhood": "Long Island City"
+  },
+  {
+    "name": "Steinway St",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Astoria"
+  },
+  {
+    "name": "46 St–Bliss St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Sunnyside"
+  },
+  {
+    "name": "52 St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Woodside"
+  },
+  {
+    "name": "61 St–Woodside",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7",
+      "LIRR"
+    ],
+    "neighborhood": "Woodside"
+  },
+  {
+    "name": "Junction Blvd",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Corona"
+  },
+  {
+    "name": "111 St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Corona"
+  },
+  {
+    "name": "103 St–Corona Plaza",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Corona"
+  },
+  {
+    "name": "90 St–Elmhurst Av",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Elmhurst"
+  },
+  {
+    "name": "82 St–Jackson Hts",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Jackson Heights"
+  },
+  {
+    "name": "74 St–Broadway",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "F",
+      "M",
+      "R",
+      "7"
+    ],
+    "transfers": [
+      "E",
+      "F",
+      "M",
+      "R",
+      "7"
+    ],
+    "neighborhood": "Jackson Heights"
+  },
+  {
+    "name": "69 St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Woodside"
+  },
+  {
+    "name": "Woodside–61 St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Woodside"
+  },
+  {
+    "name": "Citi Field–Mets–Willets Pt",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Flushing"
+  },
+  {
+    "name": "Willets Pt",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Flushing"
+  },
+  {
+    "name": "Jamaica–179 St (F)",
+    "borough": "Queens",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Briarwood",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "F"
+    ],
+    "transfers": [
+      "E",
+      "F"
+    ],
+    "neighborhood": "Briarwood"
+  },
+  {
+    "name": "Kew Gardens–Union Tpke",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "F"
+    ],
+    "transfers": [
+      "E",
+      "F"
+    ],
+    "neighborhood": "Kew Gardens"
+  },
+  {
+    "name": "Jamaica Ctr–Parsons/Archer",
+    "borough": "Queens",
+    "lines": [
+      "E",
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "E",
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Parsons Blvd",
+    "borough": "Queens",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Sutphin Blvd",
+    "borough": "Queens",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "Hollis",
+    "borough": "Queens",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Hollis"
+  },
+  {
+    "name": "St Albans",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "St. Albans"
+  },
+  {
+    "name": "Linden Blvd",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "St. Albans"
+  },
+  {
+    "name": "Van Wyck Blvd (J)",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "88 St",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Jamaica"
+  },
+  {
+    "name": "75 St–Elderts Ln",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Woodhaven"
+  },
+  {
+    "name": "85 St–Forest Pkwy",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Woodhaven"
+  },
+  {
+    "name": "Woodhaven Blvd",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Richmond Hill"
+  },
+  {
+    "name": "111 St (J)",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Richmond Hill"
+  },
+  {
+    "name": "104 St",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Richmond Hill"
+  },
+  {
+    "name": "121 St",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Richmond Hill"
+  },
+  {
+    "name": "Cleveland St",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Van Siclen Av (J/Z)",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Alabama Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Crescent St",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Norwood Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Cypress Hills",
+    "borough": "Brooklyn",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Cypress Hills"
+  },
+  {
+    "name": "Elderts Ln",
+    "borough": "Queens",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Woodhaven"
+  },
+  {
+    "name": "Chauncey St",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Halsey St (J)",
+    "borough": "Brooklyn",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Gates Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Kosciuszko St",
+    "borough": "Brooklyn",
+    "lines": [
+      "J"
+    ],
+    "transfers": [
+      "J"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Myrtle Av (J/M/Z)",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "M",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "M",
+      "Z"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Marcy Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "M",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "M",
+      "Z"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "Hewes St",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "M"
+    ],
+    "transfers": [
+      "J",
+      "M"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "Lorimer St (J/M)",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "M"
+    ],
+    "transfers": [
+      "J",
+      "M"
+    ],
+    "neighborhood": "Williamsburg"
+  },
+  {
+    "name": "Flushing Av (J/M)",
+    "borough": "Brooklyn",
+    "lines": [
+      "J",
+      "M"
+    ],
+    "transfers": [
+      "J",
+      "M"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "DeKalb Av (M)",
+    "borough": "Brooklyn",
+    "lines": [
+      "M"
+    ],
+    "transfers": [
+      "M"
+    ],
+    "neighborhood": "Bushwick"
+  },
+  {
+    "name": "Forest Av",
+    "borough": "Queens",
+    "lines": [
+      "M"
+    ],
+    "transfers": [
+      "M"
+    ],
+    "neighborhood": "Ridgewood"
+  },
+  {
+    "name": "Fresh Pond Rd",
+    "borough": "Queens",
+    "lines": [
+      "M"
+    ],
+    "transfers": [
+      "M"
+    ],
+    "neighborhood": "Ridgewood"
+  },
+  {
+    "name": "Middle Village–Metropolitan Av",
+    "borough": "Queens",
+    "lines": [
+      "M"
+    ],
+    "transfers": [
+      "M"
+    ],
+    "neighborhood": "Middle Village"
+  },
+  {
+    "name": "Juniper Valley Rd",
+    "borough": "Queens",
+    "lines": [
+      "M"
+    ],
+    "transfers": [
+      "M"
+    ],
+    "neighborhood": "Middle Village"
+  },
+  {
+    "name": "Grand Av–Newtown",
+    "borough": "Queens",
+    "lines": [
+      "M"
+    ],
+    "transfers": [
+      "M"
+    ],
+    "neighborhood": "Elmhurst"
+  },
+  {
+    "name": "Elmhurst Av",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Elmhurst"
+  },
+  {
+    "name": "Junction Blvd (M/R)",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Corona"
+  },
+  {
+    "name": "90 St",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Elmhurst"
+  },
+  {
+    "name": "Woodhaven Blvd (M/R)",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Rego Park"
+  },
+  {
+    "name": "63 Dr–Rego Park",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Rego Park"
+  },
+  {
+    "name": "67 Av",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Forest Hills"
+  },
+  {
+    "name": "75 Av",
+    "borough": "Queens",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Forest Hills"
+  },
+  {
+    "name": "21 St (G)",
+    "borough": "Queens",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Long Island City"
+  },
+  {
+    "name": "Greenpoint Av (G)",
+    "borough": "Brooklyn",
+    "lines": [
+      "G"
+    ],
+    "transfers": [
+      "G"
+    ],
+    "neighborhood": "Greenpoint"
+  },
+  {
+    "name": "21 St–Queensbridge",
+    "borough": "Queens",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "Long Island City"
+  },
+  {
+    "name": "36 St (Queens)",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Long Island City"
+  },
+  {
+    "name": "46 St (M/R)",
+    "borough": "Queens",
+    "lines": [
+      "M",
+      "R"
+    ],
+    "transfers": [
+      "M",
+      "R"
+    ],
+    "neighborhood": "Sunnyside"
+  },
+  {
+    "name": "Lowery St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Sunnyside"
+  },
+  {
+    "name": "33 St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Sunnyside"
+  },
+  {
+    "name": "40 St–Lowery St",
+    "borough": "Queens",
+    "lines": [
+      "7"
+    ],
+    "transfers": [
+      "7"
+    ],
+    "neighborhood": "Sunnyside"
+  },
+  {
+    "name": "Prospect Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "D",
+      "N",
+      "R"
+    ],
+    "transfers": [
+      "D",
+      "N",
+      "R"
+    ],
+    "neighborhood": "Sunset Park"
+  },
+  {
+    "name": "25 St (R)",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Greenwood Heights"
+  },
+  {
+    "name": "36 St (R/D/N)",
+    "borough": "Brooklyn",
+    "lines": [
+      "D",
+      "N",
+      "R"
+    ],
+    "transfers": [
+      "D",
+      "N",
+      "R"
+    ],
+    "neighborhood": "Sunset Park"
+  },
+  {
+    "name": "45 St",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Sunset Park"
+  },
+  {
+    "name": "53 St",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Sunset Park"
+  },
+  {
+    "name": "59 St (R/N)",
+    "borough": "Brooklyn",
+    "lines": [
+      "N",
+      "R"
+    ],
+    "transfers": [
+      "N",
+      "R"
+    ],
+    "neighborhood": "Sunset Park"
+  },
+  {
+    "name": "8 Av (N)",
+    "borough": "Brooklyn",
+    "lines": [
+      "N"
+    ],
+    "transfers": [
+      "N"
+    ],
+    "neighborhood": "Sunset Park"
+  },
+  {
+    "name": "Marboro St",
+    "borough": "Brooklyn",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Bensonhurst"
+  },
+  {
+    "name": "Kings Hwy (N/D)",
+    "borough": "Brooklyn",
+    "lines": [
+      "D",
+      "N"
+    ],
+    "transfers": [
+      "D",
+      "N"
+    ],
+    "neighborhood": "Bensonhurst"
+  },
+  {
+    "name": "Bay 50 St (D)",
+    "borough": "Brooklyn",
+    "lines": [
+      "D"
+    ],
+    "transfers": [
+      "D"
+    ],
+    "neighborhood": "Bensonhurst"
+  },
+  {
+    "name": "77 St (R)",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Bay Ridge"
+  },
+  {
+    "name": "86 St (R)",
+    "borough": "Brooklyn",
+    "lines": [
+      "R"
+    ],
+    "transfers": [
+      "R"
+    ],
+    "neighborhood": "Bay Ridge"
+  },
+  {
+    "name": "Presidents St",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Sterling St",
+    "borough": "Brooklyn",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Winthrop St",
+    "borough": "Brooklyn",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Church Av (2/5)",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Beverly Rd",
+    "borough": "Brooklyn",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Cortelyou Rd",
+    "borough": "Brooklyn",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Flatbush Av–Brooklyn College",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Crown Hts–Utica Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "3",
+      "4"
+    ],
+    "transfers": [
+      "3",
+      "4"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Sutter Av–Rutland Rd",
+    "borough": "Brooklyn",
+    "lines": [
+      "3"
+    ],
+    "transfers": [
+      "3"
+    ],
+    "neighborhood": "Brownsville"
+  },
+  {
+    "name": "Saratoga Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "3"
+    ],
+    "transfers": [
+      "3"
+    ],
+    "neighborhood": "Brownsville"
+  },
+  {
+    "name": "Rockaway Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "3"
+    ],
+    "transfers": [
+      "3"
+    ],
+    "neighborhood": "Brownsville"
+  },
+  {
+    "name": "Junius St",
+    "borough": "Brooklyn",
+    "lines": [
+      "3"
+    ],
+    "transfers": [
+      "3"
+    ],
+    "neighborhood": "Brownsville"
+  },
+  {
+    "name": "Pennsylvania Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "3",
+      "C"
+    ],
+    "transfers": [
+      "3",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "New Lots Av (3)",
+    "borough": "Brooklyn",
+    "lines": [
+      "3"
+    ],
+    "transfers": [
+      "3"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "East New York",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Spring Creek",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Pitkin Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Norwood Av (A/C)",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "East New York"
+  },
+  {
+    "name": "Ralph Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "C"
+    ],
+    "transfers": [
+      "C"
+    ],
+    "neighborhood": "Brownsville"
+  },
+  {
+    "name": "Rockaway Av (C)",
+    "borough": "Brooklyn",
+    "lines": [
+      "C"
+    ],
+    "transfers": [
+      "C"
+    ],
+    "neighborhood": "Brownsville"
+  },
+  {
+    "name": "Kingston–Throop Avs",
+    "borough": "Brooklyn",
+    "lines": [
+      "C"
+    ],
+    "transfers": [
+      "C"
+    ],
+    "neighborhood": "Bedford-Stuyvesant"
+  },
+  {
+    "name": "Utica Av (C/A)",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Nostrand Av (A/C)",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Kingston Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "3"
+    ],
+    "transfers": [
+      "3"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Utica Av (3/4)",
+    "borough": "Brooklyn",
+    "lines": [
+      "3",
+      "4"
+    ],
+    "transfers": [
+      "3",
+      "4"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "New York Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Crown Heights"
+  },
+  {
+    "name": "Brooklyn College–Flatbush Av",
+    "borough": "Brooklyn",
+    "lines": [
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "4",
+      "5"
+    ],
+    "neighborhood": "Flatbush"
+  },
+  {
+    "name": "Grand Army Plaza",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Prospect Heights"
+  },
+  {
+    "name": "7 Av (B/Q)",
+    "borough": "Brooklyn",
+    "lines": [
+      "B",
+      "Q"
+    ],
+    "transfers": [
+      "B",
+      "Q"
+    ],
+    "neighborhood": "Park Slope"
+  },
+  {
+    "name": "Bergen St (2/3)",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Boerum Hill"
+  },
+  {
+    "name": "Hoyt St",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Boerum Hill"
+  },
+  {
+    "name": "York St",
+    "borough": "Brooklyn",
+    "lines": [
+      "F"
+    ],
+    "transfers": [
+      "F"
+    ],
+    "neighborhood": "DUMBO"
+  },
+  {
+    "name": "High St",
+    "borough": "Brooklyn",
+    "lines": [
+      "A",
+      "C"
+    ],
+    "transfers": [
+      "A",
+      "C"
+    ],
+    "neighborhood": "Brooklyn Heights"
+  },
+  {
+    "name": "Clark St",
+    "borough": "Brooklyn",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Brooklyn Heights"
+  },
+  {
+    "name": "Borough Hall (4/5)",
+    "borough": "Brooklyn",
+    "lines": [
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "4",
+      "5"
+    ],
+    "neighborhood": "Downtown Brooklyn"
+  },
+  {
+    "name": "Wall St (2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Wall St (4/5)",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "4",
+      "5"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Bowling Green",
+    "borough": "Manhattan",
+    "lines": [
+      "4",
+      "5"
+    ],
+    "transfers": [
+      "4",
+      "5"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Broad St",
+    "borough": "Manhattan",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Whitehall St–South Ferry",
+    "borough": "Manhattan",
+    "lines": [
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "R",
+      "W"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Cortlandt St (R/W)",
+    "borough": "Manhattan",
+    "lines": [
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "R",
+      "W"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "City Hall (R/W)",
+    "borough": "Manhattan",
+    "lines": [
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "R",
+      "W"
+    ],
+    "neighborhood": "Civic Center"
+  },
+  {
+    "name": "Chambers St (J/Z)",
+    "borough": "Manhattan",
+    "lines": [
+      "J",
+      "Z"
+    ],
+    "transfers": [
+      "J",
+      "Z"
+    ],
+    "neighborhood": "Financial District"
+  },
+  {
+    "name": "Park Place (2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Civic Center"
+  },
+  {
+    "name": "Spring St (A/C/E)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "E"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "neighborhood": "SoHo"
+  },
+  {
+    "name": "Prince St",
+    "borough": "Manhattan",
+    "lines": [
+      "N",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "R",
+      "W"
+    ],
+    "neighborhood": "SoHo"
+  },
+  {
+    "name": "Spring St (6)",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "SoHo"
+  },
+  {
+    "name": "Bleecker St",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "NoHo"
+  },
+  {
+    "name": "Houston St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "SoHo"
+  },
+  {
+    "name": "Houston St (A/B/C/D/E/F/M)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "M"
+    ],
+    "transfers": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "M"
+    ],
+    "neighborhood": "SoHo"
+  },
+  {
+    "name": "Christopher St–Sheridan Sq",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "West Village"
+  },
+  {
+    "name": "14 St (1/2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "1",
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "1",
+      "2",
+      "3"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "18 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "23 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "28 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "28 St (N/R/W)",
+    "borough": "Manhattan",
+    "lines": [
+      "N",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "33 St (6)",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Murray Hill"
+  },
+  {
+    "name": "33 St (PATH)",
+    "borough": "Manhattan",
+    "lines": [
+      "PATH"
+    ],
+    "transfers": [
+      "PATH",
+      "1",
+      "2",
+      "3"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "23 St (N/R/W)",
+    "borough": "Manhattan",
+    "lines": [
+      "N",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Flatiron"
+  },
+  {
+    "name": "23 St (6)",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Gramercy"
+  },
+  {
+    "name": "23 St (F/M)",
+    "borough": "Manhattan",
+    "lines": [
+      "F",
+      "M"
+    ],
+    "transfers": [
+      "F",
+      "M"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "23 St (C/E)",
+    "borough": "Manhattan",
+    "lines": [
+      "C",
+      "E"
+    ],
+    "transfers": [
+      "C",
+      "E"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "28 St (6)",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Rose Hill"
+  },
+  {
+    "name": "28 St (F/M)",
+    "borough": "Manhattan",
+    "lines": [
+      "F",
+      "M"
+    ],
+    "transfers": [
+      "F",
+      "M"
+    ],
+    "neighborhood": "Chelsea"
+  },
+  {
+    "name": "50 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "50 St (C/E)",
+    "borough": "Manhattan",
+    "lines": [
+      "C",
+      "E"
+    ],
+    "transfers": [
+      "C",
+      "E"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "49 St (N/Q/R/W)",
+    "borough": "Manhattan",
+    "lines": [
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "transfers": [
+      "N",
+      "Q",
+      "R",
+      "W"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "Times Sq (N/Q/R/W/S)",
+    "borough": "Manhattan",
+    "lines": [
+      "N",
+      "Q",
+      "R",
+      "W",
+      "S"
+    ],
+    "transfers": [
+      "N",
+      "Q",
+      "R",
+      "W",
+      "S",
+      "1",
+      "2",
+      "3",
+      "7"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "5 Av–53 St",
+    "borough": "Manhattan",
+    "lines": [
+      "E",
+      "M"
+    ],
+    "transfers": [
+      "E",
+      "M"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "Lexington Av–63 St",
+    "borough": "Manhattan",
+    "lines": [
+      "F",
+      "Q"
+    ],
+    "transfers": [
+      "F",
+      "Q",
+      "4",
+      "5",
+      "6"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "68 St–Hunter College",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "77 St (6)",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "86 St (Q)",
+    "borough": "Manhattan",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "72 St (Q)",
+    "borough": "Manhattan",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "96 St (Q)",
+    "borough": "Manhattan",
+    "lines": [
+      "Q"
+    ],
+    "transfers": [
+      "Q"
+    ],
+    "neighborhood": "Upper East Side"
+  },
+  {
+    "name": "103 St (6)",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "East Harlem"
+  },
+  {
+    "name": "110 St–Cathedral Pkwy",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "C"
+    ],
+    "transfers": [
+      "B",
+      "C"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "103 St (B/C)",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "C"
+    ],
+    "transfers": [
+      "B",
+      "C"
+    ],
+    "neighborhood": "Manhattan Valley"
+  },
+  {
+    "name": "96 St (B/C)",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "C"
+    ],
+    "transfers": [
+      "B",
+      "C"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "81 St–Museum of Nat. History",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "C"
+    ],
+    "transfers": [
+      "B",
+      "C"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "79 St",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "66 St–Lincoln Ctr",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "50 St–8 Av",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "C",
+      "E"
+    ],
+    "transfers": [
+      "A",
+      "C",
+      "E"
+    ],
+    "neighborhood": "Midtown"
+  },
+  {
+    "name": "72 St (A/B/C/D)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "transfers": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "81 St–Museum (A/B/C/D)",
+    "borough": "Manhattan",
+    "lines": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "transfers": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "86 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Upper West Side"
+  },
+  {
+    "name": "103 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Manhattan Valley"
+  },
+  {
+    "name": "110 St–Central Park North",
+    "borough": "Manhattan",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "116 St (1)",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Morningside Heights"
+  },
+  {
+    "name": "110 St (6)",
+    "borough": "Manhattan",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "East Harlem"
+  },
+  {
+    "name": "116 St (2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "135 St (B/C)",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "C"
+    ],
+    "transfers": [
+      "B",
+      "C"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "135 St (2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "145 St (2/3)",
+    "borough": "Manhattan",
+    "lines": [
+      "2",
+      "3"
+    ],
+    "transfers": [
+      "2",
+      "3"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "148 St–Lenox Terminal",
+    "borough": "Manhattan",
+    "lines": [
+      "3"
+    ],
+    "transfers": [
+      "3"
+    ],
+    "neighborhood": "Harlem"
+  },
+  {
+    "name": "155 St (B/D)",
+    "borough": "Manhattan",
+    "lines": [
+      "B",
+      "D"
+    ],
+    "transfers": [
+      "B",
+      "D"
+    ],
+    "neighborhood": "Washington Heights"
+  },
+  {
+    "name": "155 St (C)",
+    "borough": "Manhattan",
+    "lines": [
+      "C"
+    ],
+    "transfers": [
+      "C"
+    ],
+    "neighborhood": "Washington Heights"
+  },
+  {
+    "name": "157 St",
+    "borough": "Manhattan",
+    "lines": [
+      "1"
+    ],
+    "transfers": [
+      "1"
+    ],
+    "neighborhood": "Washington Heights"
+  },
+  {
+    "name": "163 St–Amsterdam Av",
+    "borough": "Manhattan",
+    "lines": [
+      "C"
+    ],
+    "transfers": [
+      "C"
+    ],
+    "neighborhood": "Washington Heights"
+  },
+  {
+    "name": "167 St (B/D)",
+    "borough": "The Bronx",
+    "lines": [
+      "B",
+      "D"
+    ],
+    "transfers": [
+      "B",
+      "D"
+    ],
+    "neighborhood": "Highbridge"
+  },
+  {
+    "name": "170 St (B/D)",
+    "borough": "The Bronx",
+    "lines": [
+      "B",
+      "D"
+    ],
+    "transfers": [
+      "B",
+      "D"
+    ],
+    "neighborhood": "Highbridge"
+  },
+  {
+    "name": "176 St",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Morris Heights"
+  },
+  {
+    "name": "183 St",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "University Heights"
+  },
+  {
+    "name": "Burnside Av",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Burnside"
+  },
+  {
+    "name": "176 St (Jerome)",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Tremont"
+  },
+  {
+    "name": "170 St (Jerome)",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Highbridge"
+  },
+  {
+    "name": "167 St (Jerome)",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4"
+    ],
+    "neighborhood": "Highbridge"
+  },
+  {
+    "name": "161 St (4)",
+    "borough": "The Bronx",
+    "lines": [
+      "4"
+    ],
+    "transfers": [
+      "4",
+      "B",
+      "D"
+    ],
+    "neighborhood": "Highbridge"
+  },
+  {
+    "name": "138 St–Grand Concourse (4/5/6)",
+    "borough": "The Bronx",
+    "lines": [
+      "4",
+      "5",
+      "6"
+    ],
+    "transfers": [
+      "4",
+      "5",
+      "6"
+    ],
+    "neighborhood": "Mott Haven"
+  },
+  {
+    "name": "3 Av–149 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Mott Haven"
+  },
+  {
+    "name": "Intervale Av",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Crotona Park East"
+  },
+  {
+    "name": "Simpson St",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Longwood"
+  },
+  {
+    "name": "Freeman St",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "Longwood"
+  },
+  {
+    "name": "174 St",
+    "borough": "The Bronx",
+    "lines": [
+      "2"
+    ],
+    "transfers": [
+      "2"
+    ],
+    "neighborhood": "Crotona Park East"
+  },
+  {
+    "name": "West Farms Sq–E Tremont Av",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "West Farms"
+  },
+  {
+    "name": "174–175 Sts (2/5)",
+    "borough": "The Bronx",
+    "lines": [
+      "2",
+      "5"
+    ],
+    "transfers": [
+      "2",
+      "5"
+    ],
+    "neighborhood": "West Farms"
+  },
+  {
+    "name": "Parkchester",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Parkchester"
+  },
+  {
+    "name": "St Lawrence Av",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Soundview"
+  },
+  {
+    "name": "Morrison Av–Soundview",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Soundview"
+  },
+  {
+    "name": "Elder Av",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Soundview"
+  },
+  {
+    "name": "Whitlock Av",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Hunts Point"
+  },
+  {
+    "name": "Hunts Point Av",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Hunts Point"
+  },
+  {
+    "name": "Longwood Av",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Longwood"
+  },
+  {
+    "name": "E 149 St",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Mott Haven"
+  },
+  {
+    "name": "Brook Av",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Mott Haven"
+  },
+  {
+    "name": "Cypress Av",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Mott Haven"
+  },
+  {
+    "name": "E 143 St–St Mary's St",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Mott Haven"
+  },
+  {
+    "name": "Mott Haven–E 138 St (6)",
+    "borough": "The Bronx",
+    "lines": [
+      "6"
+    ],
+    "transfers": [
+      "6"
+    ],
+    "neighborhood": "Mott Haven"
+  }
+]

@@ -1,0 +1,232 @@
+[
+  {
+    "id": "1",
+    "name": "1 Train",
+    "color": "#EE352E",
+    "description": "Local service along the IRT Broadway–Seventh Avenue Line through Manhattan's West Side and the Bronx.",
+    "type": "local",
+    "division": "IRT",
+    "terminals": ["Van Cortlandt Park–242 St", "South Ferry"],
+    "boroughs": ["Bronx", "Manhattan"]
+  },
+  {
+    "id": "2",
+    "name": "2 Train",
+    "color": "#EE352E",
+    "description": "Express service connecting the Bronx, Manhattan's West Side, and Brooklyn via the IRT Broadway–Seventh Avenue Line.",
+    "type": "express",
+    "division": "IRT",
+    "terminals": ["Wakefield–241 St", "Flatbush Av–Brooklyn College"],
+    "boroughs": ["Bronx", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "3",
+    "name": "3 Train",
+    "color": "#EE352E",
+    "description": "Express service along the IRT Broadway–Seventh Avenue Line through Manhattan and Brooklyn.",
+    "type": "express",
+    "division": "IRT",
+    "terminals": ["Harlem–148 St", "New Lots Av"],
+    "boroughs": ["Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "4",
+    "name": "4 Train",
+    "color": "#00933C",
+    "description": "Express service on the IRT Lexington Avenue Line, one of the busiest subway routes in the world.",
+    "type": "express",
+    "division": "IRT",
+    "terminals": ["Woodlawn", "Crown Hts–Utica Av"],
+    "boroughs": ["Bronx", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "5",
+    "name": "5 Train",
+    "color": "#00933C",
+    "description": "Express service on the IRT Lexington Avenue Line with branches in the Bronx and Brooklyn.",
+    "type": "express",
+    "division": "IRT",
+    "terminals": ["Eastchester–Dyre Av", "Flatbush Av–Brooklyn College"],
+    "boroughs": ["Bronx", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "6",
+    "name": "6 Train",
+    "color": "#00933C",
+    "description": "Local service on the IRT Pelham Line through the Bronx and IRT Lexington Avenue Line through Manhattan.",
+    "type": "local",
+    "division": "IRT",
+    "terminals": ["Pelham Bay Park", "Brooklyn Bridge–City Hall"],
+    "boroughs": ["Bronx", "Manhattan"]
+  },
+  {
+    "id": "7",
+    "name": "7 Train",
+    "color": "#B933AD",
+    "description": "Service on the IRT Flushing Line connecting Flushing, Queens to Hudson Yards, Manhattan.",
+    "type": "local",
+    "division": "IRT",
+    "terminals": ["Flushing–Main St", "34 St–Hudson Yards"],
+    "boroughs": ["Queens", "Manhattan"]
+  },
+  {
+    "id": "A",
+    "name": "A Train",
+    "color": "#2850AD",
+    "description": "Express service on the IND Eighth Avenue Line, the longest subway line in the system.",
+    "type": "express",
+    "division": "IND",
+    "terminals": ["Inwood–207 St", "Far Rockaway–Mott Av"],
+    "boroughs": ["Manhattan", "Brooklyn", "Queens"]
+  },
+  {
+    "id": "B",
+    "name": "B Train",
+    "color": "#FF6319",
+    "description": "Rush-hour express service on the IND Sixth Avenue Line and the BMT Brighton Line.",
+    "type": "express",
+    "division": "IND",
+    "terminals": ["145 St", "Brighton Beach"],
+    "boroughs": ["Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "C",
+    "name": "C Train",
+    "color": "#2850AD",
+    "description": "Local service on the IND Eighth Avenue Line through Manhattan and Brooklyn.",
+    "type": "local",
+    "division": "IND",
+    "terminals": ["168 St", "Euclid Av"],
+    "boroughs": ["Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "D",
+    "name": "D Train",
+    "color": "#FF6319",
+    "description": "Express service connecting the Bronx, Manhattan, and Brooklyn via the IND Concourse and Sixth Avenue Lines.",
+    "type": "express",
+    "division": "IND",
+    "terminals": ["Norwood–205 St", "Coney Island–Stillwell Av"],
+    "boroughs": ["Bronx", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "E",
+    "name": "E Train",
+    "color": "#2850AD",
+    "description": "Local service on the IND Queens Boulevard and Eighth Avenue Lines connecting Jamaica, Queens to Lower Manhattan.",
+    "type": "local",
+    "division": "IND",
+    "terminals": ["Jamaica–179 St", "World Trade Center"],
+    "boroughs": ["Queens", "Manhattan"]
+  },
+  {
+    "id": "F",
+    "name": "F Train",
+    "color": "#FF6319",
+    "description": "Local service on the IND Queens Boulevard and Sixth Avenue Lines, one of the longest routes in the system.",
+    "type": "local",
+    "division": "IND",
+    "terminals": ["Jamaica–179 St", "Coney Island–Stillwell Av"],
+    "boroughs": ["Queens", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "G",
+    "name": "G Train",
+    "color": "#6CBE45",
+    "description": "The only crosstown line that does not enter Manhattan, connecting Queens and Brooklyn.",
+    "type": "local",
+    "division": "IND",
+    "terminals": ["Court Sq", "Church Av"],
+    "boroughs": ["Queens", "Brooklyn"]
+  },
+  {
+    "id": "J",
+    "name": "J Train",
+    "color": "#996633",
+    "description": "Local service on the BMT Nassau Street and Jamaica Lines connecting Jamaica, Queens to Lower Manhattan.",
+    "type": "local",
+    "division": "BMT",
+    "terminals": ["Jamaica Center–Parsons/Archer", "Broad St"],
+    "boroughs": ["Queens", "Brooklyn", "Manhattan"]
+  },
+  {
+    "id": "L",
+    "name": "L Train",
+    "color": "#A7A9AC",
+    "description": "Local service on the BMT Canarsie Line connecting Canarsie, Brooklyn to Eighth Avenue, Manhattan.",
+    "type": "local",
+    "division": "BMT",
+    "terminals": ["8 Av", "Canarsie–Rockaway Pkwy"],
+    "boroughs": ["Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "M",
+    "name": "M Train",
+    "color": "#FF6319",
+    "description": "Local service connecting Forest Hills, Queens through Manhattan and terminating in Middle Village, Brooklyn.",
+    "type": "local",
+    "division": "BMT",
+    "terminals": ["Forest Hills–71 Av", "Metropolitan Av"],
+    "boroughs": ["Queens", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "N",
+    "name": "N Train",
+    "color": "#FCCC0A",
+    "description": "Express service on the BMT Astoria and Broadway Lines connecting Astoria, Queens to Coney Island, Brooklyn.",
+    "type": "express",
+    "division": "BMT",
+    "terminals": ["Astoria–Ditmars Blvd", "Coney Island–Stillwell Av"],
+    "boroughs": ["Queens", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "Q",
+    "name": "Q Train",
+    "color": "#FCCC0A",
+    "description": "Express service on the BMT Second Avenue and Brighton Lines through Manhattan and Brooklyn.",
+    "type": "express",
+    "division": "BMT",
+    "terminals": ["96 St", "Coney Island–Stillwell Av"],
+    "boroughs": ["Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "R",
+    "name": "R Train",
+    "color": "#FCCC0A",
+    "description": "Local service on the BMT Queens Boulevard and Broadway Lines connecting Forest Hills, Queens to Bay Ridge, Brooklyn.",
+    "type": "local",
+    "division": "BMT",
+    "terminals": ["Forest Hills–71 Av", "Bay Ridge–95 St"],
+    "boroughs": ["Queens", "Manhattan", "Brooklyn"]
+  },
+  {
+    "id": "S",
+    "name": "42nd Street Shuttle",
+    "color": "#808183",
+    "description": "Short shuttle service connecting Times Square to Grand Central Terminal along 42nd Street.",
+    "type": "shuttle",
+    "division": "IRT",
+    "terminals": ["Times Sq–42 St", "Grand Central–42 St"],
+    "boroughs": ["Manhattan"]
+  },
+  {
+    "id": "W",
+    "name": "W Train",
+    "color": "#FCCC0A",
+    "description": "Local service on the BMT Astoria and Broadway Lines connecting Astoria, Queens to Lower Manhattan.",
+    "type": "local",
+    "division": "BMT",
+    "terminals": ["Astoria–Ditmars Blvd", "Whitehall St–South Ferry"],
+    "boroughs": ["Queens", "Manhattan"]
+  },
+  {
+    "id": "Z",
+    "name": "Z Train",
+    "color": "#996633",
+    "description": "Rush-hour skip-stop express service on the BMT Jamaica Line, running alongside the J train.",
+    "type": "express",
+    "division": "BMT",
+    "terminals": ["Jamaica Center–Parsons/Archer", "Broad St"],
+    "boroughs": ["Queens", "Brooklyn", "Manhattan"]
+  }
+]
