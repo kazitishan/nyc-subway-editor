@@ -11,6 +11,36 @@ const lineWeight = (zoom) => Math.min(7, Math.max(2, (zoom - 9) * 1.25));
 const bulletHtml = (route) =>
   `<img class="route-bullet" src="${bulletSrc(route)}" alt="${route}" width="20" height="20" />`;
 
+const bulletsHtml = (routes) =>
+  `<div class="station-tip-routes">${routes.map(bulletHtml).join("")}</div>`;
+
+// Click popup: name, borough, trains stopping here, and in-station transfers.
+// Transfer platforms with a different name (e.g. 42 St-Port Authority at
+// Times Sq) are labelled; same-named ones just list their trains.
+function stationPopupHtml(s) {
+  const transfers = s.transfers.length
+    ? `<div class="station-popup-section">
+        <div class="station-popup-label">Transfers</div>
+        ${s.transfers
+          .map(
+            (t) => `<div class="station-popup-transfer">
+              ${bulletsHtml(t.routes)}
+              ${t.name !== s.name ? `<span class="station-popup-via">${t.name}</span>` : ""}
+            </div>`
+          )
+          .join("")}
+      </div>`
+    : "";
+
+  return `<div class="station-tip-name">${s.name}</div>
+    <div class="station-popup-borough">${s.borough}</div>
+    <div class="station-popup-section">
+      <div class="station-popup-label">Trains</div>
+      ${bulletsHtml(s.routes)}
+    </div>
+    ${transfers}`;
+}
+
 export default function SubwayMap({ stations, segments, transfers }) {
   const containerRef = useRef(null);
 
@@ -95,11 +125,16 @@ export default function SubwayMap({ stations, segments, transfers }) {
           fillOpacity: 1,
         }).addTo(map);
         dot.bindTooltip(
-          `<div class="station-tip-name">${s.name}</div><div class="station-tip-routes">${s.routes
-            .map(bulletHtml)
-            .join("")}</div>`,
+          `<div class="station-tip-name">${s.name}</div>${bulletsHtml(s.routes)}`,
           { direction: "top", className: "station-tip", opacity: 1 }
         );
+        dot.bindPopup(stationPopupHtml(s), {
+          className: "station-popup",
+          closeButton: false,
+          autoPanPadding: [24, 24],
+        });
+        // The popup repeats the tooltip's content, so don't show both at once.
+        dot.on("popupopen", () => dot.closeTooltip());
         return { dot, lanes: lanesAt.get(s.id) ?? 1 };
       });
 
@@ -133,8 +168,10 @@ export default function SubwayMap({ stations, segments, transfers }) {
           const r = Math.max(w * 0.75, (n * w) / 2);
           dot.setRadius(r);
           dot.setStyle({ weight: zoom >= 12 ? 1.5 : 1 });
-          const tip = dot.getTooltip();
-          if (tip) tip.options.offset = [0, -r];
+          dot.getTooltip().options.offset = [0, -r];
+          // Leaflet's default popup offset is [0, 7]; lift it to the dot's top edge.
+          dot.getPopup().options.offset = [0, 7 - r];
+          if (dot.isPopupOpen()) dot.getPopup().update();
         }
       };
 

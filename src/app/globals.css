@@ -52,3 +52,47 @@ body {
   display: flex;
   gap: 0.25rem;
 }
+
+/* Station click popup */
+.station-popup .leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.16);
+  color: #171717;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+.station-popup .leaflet-popup-content {
+  margin: 0.75rem 0.875rem;
+  min-width: 10rem;
+  line-height: 1.3;
+}
+.station-popup .station-tip-name {
+  font-size: 0.9375rem;
+  margin-bottom: 0.125rem;
+}
+.station-popup-borough {
+  font-size: 0.75rem;
+  color: #737373;
+}
+.station-popup-section {
+  margin-top: 0.625rem;
+}
+.station-popup-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #737373;
+  margin-bottom: 0.3125rem;
+}
+.station-popup-transfer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.station-popup-transfer + .station-popup-transfer {
+  margin-top: 0.3125rem;
+}
+.station-popup-via {
+  font-size: 0.75rem;
+  color: #525252;
+}

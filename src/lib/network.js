@@ -1,5 +1,13 @@
 import { COLOR_ORDER, LINE_COLORS, ROUTES } from "@/data/routes";
 
+const BOROUGHS = {
+  M: "Manhattan",
+  Bk: "Brooklyn",
+  Q: "Queens",
+  Bx: "The Bronx",
+  SI: "Staten Island",
+};
+
 // Turns raw stops.json rows plus route paths into what the map draws:
 // stations, track segments (with the line colors running on each), and
 // transfer connectors between stations in the same complex.
@@ -10,10 +18,12 @@ export function buildNetwork(rawStops) {
     lat: Number(s.gtfs_latitude),
     lng: Number(s.gtfs_longitude),
     routes: s.daytime_routes.split(" ").filter(Boolean),
+    borough: BOROUGHS[s.borough] ?? s.borough,
     complexId: s.complex_id,
     ada: s.ada === "1",
   }));
   const byId = new Map(stations.map((s) => [s.id, s]));
+  addStationTransfers(stations);
 
   // One segment per pair of adjacent stations. Its direction is fixed by the
   // first path that uses it, so side-by-side colors stay on consistent sides.
@@ -42,17 +52,40 @@ export function buildNetwork(rawStops) {
   return { stations, segments: segmentList, transfers: buildTransfers(stations) };
 }
 
-// Connect stations in the same complex with a minimum spanning tree so
-// multi-station complexes draw as a tidy chain rather than a star.
-function buildTransfers(stations) {
+// Stations sharing a complex_id are connected in-system. Give each station the
+// routes it can transfer to, grouped by the platform's name (e.g. at Times Sq
+// 1/2/3: N Q R W 7 S at "Times Sq-42 St", A C E at "42 St-Port Authority").
+function addStationTransfers(stations) {
+  const complexes = groupByComplex(stations);
+  for (const s of stations) {
+    const seen = new Set(s.routes);
+    const byName = new Map();
+    for (const other of complexes.get(s.complexId)) {
+      if (other === s) continue;
+      const routes = other.routes.filter((r) => !seen.has(r));
+      routes.forEach((r) => seen.add(r));
+      if (!routes.length) continue;
+      if (!byName.has(other.name)) byName.set(other.name, []);
+      byName.get(other.name).push(...routes);
+    }
+    s.transfers = [...byName].map(([name, routes]) => ({ name, routes }));
+  }
+}
+
+function groupByComplex(stations) {
   const complexes = new Map();
   for (const s of stations) {
     if (!complexes.has(s.complexId)) complexes.set(s.complexId, []);
     complexes.get(s.complexId).push(s);
   }
+  return complexes;
+}
 
+// Connect stations in the same complex with a minimum spanning tree so
+// multi-station complexes draw as a tidy chain rather than a star.
+function buildTransfers(stations) {
   const links = [];
-  for (const members of complexes.values()) {
+  for (const members of groupByComplex(stations).values()) {
     if (members.length < 2) continue;
     const inTree = [members[0]];
     const rest = members.slice(1);
