@@ -50,7 +50,54 @@
         ]
     },
     "Interborough Express (IBX)": {
-
+        "colors": [
+            { "id": "pink", "hex": "#FE26B5" }
+        ],
+        "routes": [
+            {
+                "id": "IBX",
+                "bullet": "IBX",
+                "name": "Interborough Express",
+                "color": "pink",
+                "paths": [
+                    ["X01", "X02", "X03", "X04", "X05", "X06", "X07", "X08", "X09", "X10", "X11", "X12", "X13", "X14", "X15", "X16", "X17", "X18"]
+                ]
+            }
+        ],
+        "stops": [
+            { "id": "X01", "name": "Brooklyn Army Terminal", "borough": "Brooklyn", "lat": 40.6420, "lng": -74.0235, "accessibility": "full" },
+            { "id": "X02", "name": "4th Av", "borough": "Brooklyn", "lat": 40.6393, "lng": -74.0204, "accessibility": "full" },
+            { "id": "X03", "name": "8th Av", "borough": "Brooklyn", "lat": 40.6348, "lng": -74.0118, "accessibility": "full" },
+            { "id": "X04", "name": "New Utrecht Av", "borough": "Brooklyn", "lat": 40.6260, "lng": -73.9980, "accessibility": "full" },
+            { "id": "X05", "name": "McDonald Av", "borough": "Brooklyn", "lat": 40.6262, "lng": -73.9758, "accessibility": "full" },
+            { "id": "X06", "name": "East 16th St", "borough": "Brooklyn", "lat": 40.6297, "lng": -73.9605, "accessibility": "full" },
+            { "id": "X07", "name": "Flatbush Av–Nostrand Av", "borough": "Brooklyn", "lat": 40.6330, "lng": -73.9470, "accessibility": "full" },
+            { "id": "X08", "name": "Utica Av", "borough": "Brooklyn", "lat": 40.6386, "lng": -73.9293, "accessibility": "full" },
+            { "id": "X09", "name": "Remsen Av", "borough": "Brooklyn", "lat": 40.6460, "lng": -73.9170, "accessibility": "full" },
+            { "id": "X10", "name": "Linden Blvd", "borough": "Brooklyn", "lat": 40.6567, "lng": -73.8998, "accessibility": "full" },
+            { "id": "X11", "name": "Livonia Av", "borough": "Brooklyn", "lat": 40.6638, "lng": -73.9012, "accessibility": "full" },
+            { "id": "X12", "name": "Atlantic Av", "borough": "Brooklyn", "lat": 40.6765, "lng": -73.9040, "accessibility": "full" },
+            { "id": "X13", "name": "Wilson Av", "borough": "Brooklyn", "lat": 40.6890, "lng": -73.9050, "accessibility": "full" },
+            { "id": "X14", "name": "Myrtle Av", "borough": "Queens", "lat": 40.7002, "lng": -73.8955, "accessibility": "full" },
+            { "id": "X15", "name": "Metropolitan Av", "borough": "Queens", "lat": 40.7108, "lng": -73.8945, "accessibility": "full" },
+            { "id": "X16", "name": "Eliot Av", "borough": "Queens", "lat": 40.7228, "lng": -73.8925, "accessibility": "full" },
+            { "id": "X17", "name": "Grand Av", "borough": "Queens", "lat": 40.7290, "lng": -73.8945, "accessibility": "full" },
+            { "id": "X18", "name": "Roosevelt Av", "borough": "Queens", "lat": 40.7465, "lng": -73.8965, "accessibility": "full" }
+        ],
+        "stations": [
+            { "id": "35", "stops": ["X02"] },
+            { "id": "71", "stops": ["X03"] },
+            { "id": "615", "stops": ["X04"] },
+            { "id": "246", "stops": ["X05"] },
+            { "id": "48", "stops": ["X06"] },
+            { "id": "359", "stops": ["X07"] },
+            { "id": "136", "stops": ["X10"] },
+            { "id": "135", "stops": ["X11", "254"] },
+            { "id": "621", "stops": ["X12"] },
+            { "id": "130", "stops": ["X13"] },
+            { "id": "109", "stops": ["X14"] },
+            { "id": "616", "stops": ["X18"] }
+        ]
     },
     "Queenslink": {
 

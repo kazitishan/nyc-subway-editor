@@ -13,6 +13,8 @@
 //   stations: [{ id, name?, stops }]
 //               existing id → the stops join that station (in-system transfers)
 //               new id      → a new station
+//               listing a stop that's already in another station merges
+//               that station in (e.g. joining Livonia Av and Junius St)
 //             New stops left out of every station get a station of their own.
 //
 // A proposal route serves every stop on its paths, so stops pick up the route's
@@ -45,13 +47,24 @@ export function applyProposals(base, proposals) {
     }
 
     for (const st of p.stations ?? []) {
-      const existing = stationById.get(st.id);
-      if (existing) {
-        existing.stops.push(...st.stops.filter((id) => !existing.stops.includes(id)));
-      } else {
-        const station = { ...st, stops: [...st.stops] };
+      let station = stationById.get(st.id);
+      if (!station) {
+        station = { ...st, stops: [] };
         stations.push(station);
         stationById.set(station.id, station);
+      }
+      for (const id of st.stops) {
+        if (station.stops.includes(id)) continue;
+        // A stop that already belongs to another station brings that whole
+        // station with it, so two existing stations can be joined into one.
+        const other = stations.find((s) => s !== station && s.stops.includes(id));
+        if (other) {
+          station.stops.push(...other.stops);
+          stations.splice(stations.indexOf(other), 1);
+          stationById.delete(other.id);
+        } else {
+          station.stops.push(id);
+        }
       }
     }
 
