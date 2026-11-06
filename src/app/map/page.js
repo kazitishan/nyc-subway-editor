@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SubwayMap from "@/components/SubwayMap";
+import boroughs from "@/data/boroughs.json";
 import stops from "@/data/stops.json";
 import { COLOR_ORDER, LINE_COLORS, ROUTES, bulletSrc } from "@/data/routes";
 import { buildNetwork } from "@/lib/network";
@@ -20,7 +21,12 @@ export default function MapPage() {
 
   return (
     <div className="relative h-dvh w-full overflow-hidden">
-      <SubwayMap stations={stations} segments={segments} transfers={transfers} />
+      <SubwayMap
+        stations={stations}
+        segments={segments}
+        transfers={transfers}
+        boroughs={boroughs}
+      />
 
       <header className="pointer-events-none absolute inset-x-0 top-0 z-[1000] flex items-start p-4">
         <div className="pointer-events-auto flex items-center gap-3 rounded-xl border border-black/10 bg-white/95 px-4 py-2.5 text-neutral-900 shadow-sm backdrop-blur">

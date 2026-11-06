@@ -41,7 +41,7 @@ function stationPopupHtml(s) {
     ${transfers}`;
 }
 
-export default function SubwayMap({ stations, segments, transfers }) {
+export default function SubwayMap({ stations, segments, transfers, boroughs }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -82,6 +82,13 @@ export default function SubwayMap({ stations, segments, transfers }) {
       }).addTo(map);
 
       const renderer = L.canvas({ padding: 0.5, tolerance: 6 });
+
+      // Borough outlines (NYC Open Data, simplified), drawn first so they sit under the lines.
+      L.geoJSON(boroughs, {
+        renderer,
+        interactive: false,
+        style: { color: "#525252", weight: 1.5, opacity: 0.7, fill: false },
+      }).addTo(map);
 
       // Widest bundle of parallel lines touching each station, used to size its dot.
       const lanesAt = new Map();
@@ -183,7 +190,7 @@ export default function SubwayMap({ stations, segments, transfers }) {
       cancelled = true;
       map?.remove();
     };
-  }, [stations, segments, transfers]);
+  }, [stations, segments, transfers, boroughs]);
 
   return <div ref={containerRef} className="h-full w-full" />;
 }
