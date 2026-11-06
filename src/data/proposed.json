@@ -125,7 +125,22 @@
         ]
     },
     "Nostrand Avenue Extension": {
-
+        "routes": [
+            {
+                "id": "2",
+                "paths": [
+                    ["247", "V01", "V02", "V03", "V04", "V05", "V06"]
+                ]
+            }
+        ],
+        "stops": [
+            { "id": "V01", "name": "Avenue J", "borough": "Brooklyn", "lat": 40.6252, "lng": -73.9459, "accessibility": "full" },
+            { "id": "V02", "name": "Avenue M", "borough": "Brooklyn", "lat": 40.6178, "lng": -73.9449, "accessibility": "full" },
+            { "id": "V03", "name": "Avenue P", "borough": "Brooklyn", "lat": 40.6103, "lng": -73.9439, "accessibility": "full" },
+            { "id": "V04", "name": "Avenue U", "borough": "Brooklyn", "lat": 40.5979, "lng": -73.9422, "accessibility": "full" },
+            { "id": "V05", "name": "Avenue X", "borough": "Brooklyn", "lat": 40.5905, "lng": -73.9412, "accessibility": "full" },
+            { "id": "V06", "name": "Manhattan Beach", "borough": "Brooklyn", "lat": 40.5772, "lng": -73.9395, "accessibility": "full" }
+        ]
     },
     "Redhook Extension": {
         "routes": [
