@@ -128,6 +128,18 @@
 
     },
     "Redhook Extension": {
-
+        "routes": [
+            {
+                "id": "W",
+                "paths": [
+                    ["R27", "W01", "W02", "W03"]
+                ]
+            }
+        ],
+        "stops": [
+            { "id": "W01", "name": "Columbia St", "borough": "Brooklyn", "lat": 40.6879, "lng": -74.0002, "accessibility": "full" },
+            { "id": "W02", "name": "Atlantic Basin", "borough": "Brooklyn", "lat": 40.6804, "lng": -74.0086, "accessibility": "full" },
+            { "id": "W03", "name": "Red Hook", "borough": "Brooklyn", "lat": 40.6746, "lng": -74.0048, "accessibility": "full" }
+        ]
     }
 }

@@ -2,7 +2,7 @@
 
 This document explains how **NYC Subway Editor** is put together: what each file does, how data moves from JSON on disk to colored lines on a map, and the rendering tricks that make shared track, transfers, and station dots look right. It also records the project's current limits and the gotchas worth knowing before you change anything.
 
-> **Status (Nov 2026):** the app is a **viewer** of the current NYC subway that can also overlay **proposed lines**. So far the Second Avenue Subway (Q extension + new T), the Interborough Express (IBX), and the Utica Avenue 4 extension have data. Editing and file upload are not built yet. See [Current state and gaps](#current-state-and-gaps).
+> **Status (Nov 2026):** the app is a **viewer** of the current NYC subway that can also overlay **proposed lines**. So far the Second Avenue Subway (Q extension + new T), the Interborough Express (IBX), the Utica Avenue 4 extension, and the Red Hook W extension have data. Editing and file upload are not built yet. See [Current state and gaps](#current-state-and-gaps).
 
 ---
 
@@ -124,7 +124,7 @@ A static Server Component. It renders the title, a subtitle, and two actions:
    - `legend = buildLegend(map)`: one row per color that has routes, in `map.colors` order, with de-duplicated bullets.
 3. **Renders:**
    - `<SubwayMap stops segments transfers boroughs />`, which fills the viewport (`h-dvh`).
-   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`map.stations.length`: 445 for the base map, 452 with the Second Avenue Subway on, 450 with the IBX on, 452 with the Utica extension on, 463 with all three).
+   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`map.stations.length`: 445 for the base map, 452 with the Second Avenue Subway on, 450 with the IBX on, 452 with the Utica extension on, 448 with Red Hook on, 466 with all four).
    - A floating **Proposed Lines** panel (top-right, `w-64`): a native `<details>` that starts **collapsed**. Its `+` icon rotates to `×` when open. It has one **controlled** checkbox per key of `proposed.json`, in file order. Toggling a box adds or removes its name in `enabled`. Proposals with an empty `{}` value can be checked but change nothing. The panel sits at the top-right corner, clear of the zoom control at the bottom-right.
    - A floating **legend** (bottom-left): a native `<details open>`. Each row shows a color swatch followed by `next/image` bullets. It is built from the merged map, so a checked proposal's new routes (e.g. the teal **T** and the pink **IBX**) appear in it.
 
@@ -294,8 +294,9 @@ Note: the feature is named `"Bronx"`, but stops use `"The Bronx"`. Nothing joins
     "stations": [{ "id": "610", "stops": ["T08"] }, ...]                               // join existing complexes
   },
   "Interborough Express (IBX)": { /* same shape: pink IBX route, stops X01–X18 */ },
-  "Queenslink": {}, "Utica Avenue Extension": {},
-  "Nostrand Avenue Extension": {}, "Redhook Extension": {}
+  "Utica Avenue Extension": { /* extends route 4 from 250, stops U01–U07 */ },
+  "Redhook Extension":      { /* extends route W from R27, stops W01–W03 */ },
+  "Queenslink": {}, "Nostrand Avenue Extension": {}
 }
 ```
 
@@ -354,6 +355,13 @@ Ordering details:
 - 7 new stops, `U01`–`U07`, from Rutland Rd–Winthrop St to Kings Plaza, all in Brooklyn (checked against `boroughs.json`). Names and coordinates come from the user-supplied table. `accessibility: "full"` is the same assumption as above.
 - **Cross-proposal transfer:** a new station `U04` ("Kings Highway–Av H / Utica Av") lists `U04` and the IBX's `X08` (Utica Av, ~0.5 km away). With only Utica on, `X08` is dropped, so U04 has no transfers. With the IBX on too, the two stops are linked and each popup lists the other's train.
 - Counts: Utica alone gives 452 stations, 503 stops, 512 segments, 48 transfer links. IBX + Utica gives 456 / 521 / 529 / 62. All three proposals give 463 / 537 / 545 / 71.
+
+**Redhook Extension data (W train):**
+- **No new route or color.** It adds a second path to the existing route `W`: `R27 → W01 → W02 → W03`. `R27` is Whitehall St–South Ferry, the W's current southern terminal, continuing the W's north → south direction.
+- 3 new stops, all in Brooklyn (checked against `boroughs.json`): `W01` Columbia St, `W02` Atlantic Basin, `W03` Red Hook. Names and coordinates come from the user-supplied table. `accessibility: "full"` is the same assumption as above. No `stations` entries: none of the new stops has a transfer, so each gets its own station.
+- The R and 1 transfers listed at Whitehall St–South Ferry already exist in the base map: station `635` holds `R27` (R W) and `142` (South Ferry, 1). Nothing needed adding.
+- The extension is a single yellow lane (the W alone). It shares no track with other routes.
+- Counts: Red Hook alone gives 448 stations, 499 stops, 508 segments, 48 transfer links. All four populated proposals give 466 / 540 / 548 / 71.
 
 ### `public/` images
 
@@ -606,7 +614,7 @@ What exists vs. what the name "Editor" promises:
 | Legend | ✅ Done (includes routes from checked proposals) |
 | **Upload File** button on `/` | ❌ No handler. Intended to load a user-provided map document (same shape as `map.json`). |
 | Editing routes, stops, colors | ❌ Not started. The only client-side state is which proposals are checked. |
-| Proposed lines (`proposed.json`) | 🟡 Toggle panel + merge engine work. **Second Avenue Subway** (Q extension + T), **IBX**, and **Utica Avenue Extension** (4) have data. Queenslink, Nostrand, and Red Hook are empty `{}` and do nothing when checked. |
+| Proposed lines (`proposed.json`) | 🟡 Toggle panel + merge engine work. **Second Avenue Subway** (Q extension + T), **IBX**, **Utica Avenue Extension** (4), and **Redhook Extension** (W) have data. Queenslink and Nostrand are empty `{}` and do nothing when checked. |
 | Export / save | ❌ None. |
 | Route `name`, map `name` / `description`, station `name` | Present in data, not displayed. |
 | Tests | None. |
@@ -628,7 +636,7 @@ What exists vs. what the name "Editor" promises:
 11. **Offsets update only on `zoomend`.** During the zoom animation, lanes are scaled with the old offsets, then snap into place. This is expected.
 12. **Big payload:** the raw `map.json` (~145 KB), `proposed.json`, and `boroughs.json` (~164 KB) are all serialized into the page's RSC payload as `MapView` props. If these grow, consider simplifying the GeoJSON further or loading it from `/public`.
 13. **Proposal paths must list only the stops served** (see the service rule in [`proposed.json`](#proposedjson-and-applyproposals)). Putting a stop in a proposal path adds that route's bullet to the stop, even if it's an existing stop.
-14. **Proposal stop ids must not collide** with base stop ids (or each other). A duplicate id is silently skipped, and the route's path would then point at the existing stop. SAS uses `T01`–`T16`, IBX `X01`–`X18`, and Utica `U01`–`U07`; pick a distinct prefix for each new proposal.
+14. **Proposal stop ids must not collide** with base stop ids (or each other). A duplicate id is silently skipped, and the route's path would then point at the existing stop. SAS uses `T01`–`T16`, IBX `X01`–`X18`, Utica `U01`–`U07`, and Red Hook `W01`–`W03`; pick a distinct prefix for each new proposal.
 15. **Proposals are applied in file order**, so a later proposal can extend routes, stops, or stations added by an earlier one, but not the other way round.
 
 ---
