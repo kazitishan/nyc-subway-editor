@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center px-6 py-16">
@@ -8,12 +10,12 @@ export default function Home() {
         </p>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <button
-            type="button"
+          <Link
+            href="/map"
             className="flex-1 rounded-lg bg-foreground px-5 py-3 font-medium text-background transition-opacity hover:opacity-85"
           >
             Use Current Subway Map
-          </button>
+          </Link>
           <button
             type="button"
             className="flex-1 rounded-lg border border-neutral-300 px-5 py-3 font-medium transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900"

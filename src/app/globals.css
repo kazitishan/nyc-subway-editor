@@ -25,3 +25,30 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Subway route bullet images (map legend and station tooltips) */
+.route-bullet {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Station hover tooltip */
+.leaflet-tooltip.station-tip {
+  padding: 0.5rem 0.625rem;
+  border: 1px solid rgb(0 0 0 / 0.08);
+  border-radius: 0.625rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+  color: #171717;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+.station-tip-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+}
+.station-tip-routes {
+  display: flex;
+  gap: 0.25rem;
+}
