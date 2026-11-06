@@ -2,27 +2,32 @@ import Image from "next/image";
 import Link from "next/link";
 import SubwayMap from "@/components/SubwayMap";
 import boroughs from "@/data/boroughs.json";
-import stops from "@/data/stops.json";
-import { COLOR_ORDER, LINE_COLORS, ROUTES, bulletSrc } from "@/data/routes";
+import subwayMap from "@/data/map.json";
+import { bulletSrc } from "@/lib/bullets";
 import { buildNetwork } from "@/lib/network";
 
 export const metadata = {
   title: "Current Subway Map · NYC Subway Editor",
 };
 
-// Routes grouped by trunk-line color, in legend order.
-const legendGroups = COLOR_ORDER.map((color) => ({
-  color: LINE_COLORS[color],
-  routes: [...new Set(ROUTES.filter((r) => r.color === color).map((r) => r.id))],
-})).filter((g) => g.routes.length);
+// Route bullets grouped by line color, in the map's color order. The three
+// shuttles share the S bullet, so bullets are de-duplicated.
+const legendGroups = subwayMap.colors
+  .map((color) => ({
+    color: color.hex,
+    bullets: [
+      ...new Set(subwayMap.routes.filter((r) => r.color === color.id).map((r) => r.bullet)),
+    ],
+  }))
+  .filter((g) => g.bullets.length);
 
 export default function MapPage() {
-  const { stations, segments, transfers } = buildNetwork(stops);
+  const { stops, segments, transfers } = buildNetwork(subwayMap);
 
   return (
     <div className="relative h-dvh w-full overflow-hidden">
       <SubwayMap
-        stations={stations}
+        stops={stops}
         segments={segments}
         transfers={transfers}
         boroughs={boroughs}
@@ -39,7 +44,7 @@ export default function MapPage() {
           <span className="h-4 w-px bg-neutral-200" />
           <h1 className="text-sm font-semibold">Current Subway Map</h1>
           <span className="hidden text-xs text-neutral-500 sm:inline">
-            {stations.length} stations
+            {subwayMap.stations.length} stations
           </span>
         </div>
       </header>
@@ -56,12 +61,12 @@ export default function MapPage() {
             <li key={g.color} className="flex items-center gap-2">
               <span className="h-1 w-5 rounded-full" style={{ background: g.color }} />
               <span className="flex gap-1">
-                {g.routes.map((id) => (
+                {g.bullets.map((bullet) => (
                   <Image
-                    key={id}
+                    key={bullet}
                     className="route-bullet"
-                    src={bulletSrc(id)}
-                    alt={`${id} train`}
+                    src={bulletSrc(bullet)}
+                    alt={`${bullet} train`}
                     width={20}
                     height={20}
                   />

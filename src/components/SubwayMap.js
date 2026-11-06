@@ -2,17 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
-import { bulletSrc } from "@/data/routes";
+import { bulletSrc } from "@/lib/bullets";
 
 // Track width in pixels for a zoom level; lanes sit side by side at this spacing.
 const lineWeight = (zoom) => Math.min(7, Math.max(2, (zoom - 9) * 1.25));
 
 // Tooltips are plain HTML strings, so bullets here are <img> tags rather than next/image.
-const bulletHtml = (route) =>
-  `<img class="route-bullet" src="${bulletSrc(route)}" alt="${route}" width="20" height="20" />`;
+const bulletHtml = (bullet) =>
+  `<img class="route-bullet" src="${bulletSrc(bullet)}" alt="${bullet}" width="20" height="20" />`;
 
-const bulletsHtml = (routes) =>
-  `<div class="station-tip-routes">${routes.map(bulletHtml).join("")}</div>`;
+const bulletsHtml = (bullets) =>
+  `<div class="station-tip-routes">${bullets.map(bulletHtml).join("")}</div>`;
 
 const accessibilityLabel = (s) =>
   s.accessibility === "full"
@@ -21,7 +21,7 @@ const accessibilityLabel = (s) =>
       ? `Accessible: ${s.accessibilityNote ?? "partial"}`
       : null;
 
-// Station name, followed by the accessibility icon when the station has one.
+// Stop name, followed by the accessibility icon when the stop has one.
 const nameHtml = (s) => {
   const label = accessibilityLabel(s);
   const icon = label
@@ -40,7 +40,7 @@ function stationPopupHtml(s) {
         ${s.transfers
           .map(
             (t) => `<div class="station-popup-transfer">
-              ${bulletsHtml(t.routes)}
+              ${bulletsHtml(t.bullets)}
               ${t.name !== s.name ? `<span class="station-popup-via">${t.name}</span>` : ""}
             </div>`
           )
@@ -53,12 +53,12 @@ function stationPopupHtml(s) {
     <div class="station-popup-borough">${s.borough}${label ? ` · ${label}` : ""}</div>
     <div class="station-popup-section">
       <div class="station-popup-label">Trains</div>
-      ${bulletsHtml(s.routes)}
+      ${bulletsHtml(s.bullets)}
     </div>
     ${transfers}`;
 }
 
-export default function SubwayMap({ stations, segments, transfers, boroughs }) {
+export default function SubwayMap({ stops, segments, transfers, boroughs }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
     import("leaflet").then(({ default: L }) => {
       if (cancelled || !containerRef.current) return;
 
-      const byId = new Map(stations.map((s) => [s.id, s]));
+      const byId = new Map(stops.map((s) => [s.id, s]));
       const latLngOf = (id) => {
         const s = byId.get(id);
         return L.latLng(s.lat, s.lng);
@@ -91,7 +91,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
       L.control.zoom({ position: "bottomright" }).addTo(map);
       // The map needs a view before canvas layers can be added to it.
       map.fitBounds(
-        L.latLngBounds(stations.map((s) => [s.lat, s.lng])),
+        L.latLngBounds(stops.map((s) => [s.lat, s.lng])),
         { padding: [24, 24] }
       );
 
@@ -120,7 +120,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
         style: { color: "#525252", weight: 1.5, opacity: 0.7, fill: false },
       }).addTo(map);
 
-      // Widest bundle of parallel lines touching each station, used to size its dot.
+      // Widest bundle of parallel lines touching each stop, used to size its dot.
       const lanesAt = new Map();
       for (const seg of segments) {
         for (const id of [seg.from, seg.to]) {
@@ -146,7 +146,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
         });
       }
 
-      // Transfers between stations in the same complex: dark outline, white core.
+      // Transfers between stops in the same station: dark outline, white core.
       const transferLines = transfers.map(([from, to]) => {
         const pts = [latLngOf(from), latLngOf(to)];
         const outline = L.polyline(pts, { renderer, color: "#1a1a1a", interactive: false }).addTo(map);
@@ -154,7 +154,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
         return { outline, core };
       });
 
-      const stationDots = stations.map((s) => {
+      const stopDots = stops.map((s) => {
         const dot = L.circleMarker([s.lat, s.lng], {
           renderer,
           color: "#1a1a1a",
@@ -162,7 +162,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
           fillOpacity: 1,
         }).addTo(map);
         dot.bindTooltip(
-          `${nameHtml(s)}${bulletsHtml(s.routes)}`,
+          `${nameHtml(s)}${bulletsHtml(s.bullets)}`,
           { direction: "top", className: "station-tip", opacity: 1 }
         );
         dot.bindPopup(stationPopupHtml(s), {
@@ -201,7 +201,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
           core.setStyle({ weight: Math.max(1, w * 1.4 - 3) });
         }
 
-        for (const { dot, lanes: n } of stationDots) {
+        for (const { dot, lanes: n } of stopDots) {
           const r = Math.max(w * 0.75, (n * w) / 2);
           dot.setRadius(r);
           dot.setStyle({ weight: zoom >= 12 ? 1.5 : 1 });
@@ -220,7 +220,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
       cancelled = true;
       map?.remove();
     };
-  }, [stations, segments, transfers, boroughs]);
+  }, [stops, segments, transfers, boroughs]);
 
   return <div ref={containerRef} className="h-full w-full" />;
 }
