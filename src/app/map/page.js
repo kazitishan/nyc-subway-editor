@@ -3,6 +3,7 @@ import Link from "next/link";
 import SubwayMap from "@/components/SubwayMap";
 import boroughs from "@/data/boroughs.json";
 import subwayMap from "@/data/map.json";
+import proposed from "@/data/proposed.json";
 import { bulletSrc } from "@/lib/bullets";
 import { buildNetwork } from "@/lib/network";
 
@@ -48,6 +49,24 @@ export default function MapPage() {
           </span>
         </div>
       </header>
+
+      {/* Proposed lines panel. Checkboxes are uncontrolled and don't affect the map yet. */}
+      <details className="group absolute right-4 top-4 z-[1000] w-64 max-w-[calc(100vw-2rem)] rounded-xl border border-black/10 bg-white/95 text-neutral-900 shadow-sm backdrop-blur">
+        <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-2.5 text-sm font-semibold">
+          Proposed Lines
+          <span className="text-neutral-400 transition-transform group-open:rotate-45">+</span>
+        </summary>
+        <ul className="space-y-1 px-2 pb-2">
+          {Object.keys(proposed).map((name) => (
+            <li key={name}>
+              <label className="flex cursor-pointer items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm hover:bg-neutral-100">
+                <input type="checkbox" className="h-4 w-4 accent-neutral-900" />
+                {name}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </details>
 
       <details
         open

@@ -92,7 +92,7 @@ nyc-subway-editor/
     └── data/
         ├── map.json       # THE map document: colors, routes, stations, stops (~145 KB)
         ├── boroughs.json  # GeoJSON FeatureCollection of the 5 borough outlines (~164 KB)
-        └── proposed.json  # Names of 5 proposed lines; not used by any code yet
+        └── proposed.json  # Object keyed by proposed line name (6 lines); keys listed as (non-functional) checkboxes on /map
 ```
 
 `.next/` and `node_modules/` are build output and dependencies. Both are git-ignored.
@@ -119,6 +119,7 @@ A Server Component that:
    - `<SubwayMap stops segments transfers boroughs />`, which fills the viewport (`h-dvh`).
    - A floating **header** (top-left): a "← Back" link, the title, and a station count (`subwayMap.stations.length`, which is 445).
    - A floating **legend** (bottom-left): a native `<details open>` element, so collapsing works without JavaScript. Each row shows a color swatch followed by `next/image` bullets.
+   - A floating **Proposed Lines** panel (top-right, `w-64`): a native `<details>` that starts **collapsed**. Its `+` icon rotates to `×` when open. It has one checkbox per key of `proposed.json` (`Object.keys`, in file order), keyed and labelled by that name. The checkboxes are **uncontrolled** (no React state, no handlers), so the page is still a pure Server Component. Checking one has no effect on the map yet. The panel sits at the top-right corner, clear of the zoom control at the bottom-right.
 
 Overlays use `z-[1000]` so they sit above Leaflet's panes (Leaflet uses z-indexes up to about 800). The header wrapper is `pointer-events-none` and only its inner card is `pointer-events-auto`, so the empty strip across the top still lets you drag the map.
 
@@ -266,11 +267,13 @@ Note: the feature is named `"Bronx"`, but stops use `"The Bronx"`. Nothing joins
 ### `proposed.json`
 
 ```json
-[{ "name": "Queenslink" }, { "name": "Interborough Express (IBX)" }, { "name": "Second Avenue Subway" },
- { "name": "Utica Avenue Line" }, { "name": "Nostrand Avenue Line" }]
+{
+  "Second Avenue Subway": {}, "Interborough Express (IBX)": {}, "Queenslink": {},
+  "Utica Avenue Extension": {}, "Nostrand Avenue Extension": {}, "Redhook Extension": {}
+}
 ```
 
-Only names. **No code imports it.** It is a placeholder for a future proposed-lines feature.
+An **object keyed by line name**. The values are empty objects for now, presumably to hold each line's details later. Only the keys are used. `map/page.js` lists them as checkboxes in the **Proposed Lines** panel (top-right, collapsed by default). The checkboxes are uncontrolled and do nothing yet. They are placeholders for a future proposed-lines feature.
 
 ### `public/` images
 
@@ -509,7 +512,7 @@ What exists vs. what the name "Editor" promises:
 | Legend | ✅ Done |
 | **Upload File** button on `/` | ❌ No handler. Intended to load a user-provided map document (same shape as `map.json`). |
 | Editing routes, stops, colors | ❌ Not started. Data is read-only, and there is no client-side state for it. |
-| Proposed lines (`proposed.json`) | ❌ Only a list of names, not imported anywhere. |
+| Proposed lines (`proposed.json`) | 🟡 A UI-only checkbox panel lists the names. Checking a box does nothing yet. |
 | Export / save | ❌ None. |
 | Route `name`, map `name` / `description`, station `name` | Present in data, not displayed. |
 | Tests | None. |
@@ -557,7 +560,7 @@ What exists vs. what the name "Editor" promises:
 
 ### Use `proposed.json`
 
-Give each entry the same fields as a route (`color`, `paths`, and probably new stops) and either merge it into the network before `buildNetwork` or render it as a separate, toggleable layer.
+Fill each line's (currently empty) object with the same fields as a route (`color`, `paths`, and probably new stops) and either merge it into the network before `buildNetwork` or render it as a separate, toggleable layer.
 
 ---
 
