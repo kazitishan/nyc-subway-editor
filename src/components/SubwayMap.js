@@ -75,11 +75,18 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
         return L.latLng(s.lat, s.lng);
       };
 
+      // Keep the view around NYC: the five boroughs plus a margin of 15% on each side.
+      const panBounds = L.geoJSON(boroughs).getBounds().pad(0.15);
+
       map = L.map(containerRef.current, {
         zoomControl: false,
         preferCanvas: true,
-        minZoom: 10,
         maxZoom: 18,
+        maxBounds: panBounds,
+        maxBoundsViscosity: 1, // hard stop at the edge rather than rubber-banding
+        // Quarter-step zoom levels let the zoom-out limit fit NYC closely
+        // instead of jumping to the next whole level, which shows far more area.
+        zoomSnap: 0.25,
       });
       L.control.zoom({ position: "bottomright" }).addTo(map);
       // The map needs a view before canvas layers can be added to it.
@@ -87,6 +94,12 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
         L.latLngBounds(stations.map((s) => [s.lat, s.lng])),
         { padding: [24, 24] }
       );
+
+      // Don't allow zooming out past the point where the whole allowed area fits
+      // on screen; recompute when the window size changes.
+      const limitZoomOut = () => map.setMinZoom(map.getBoundsZoom(panBounds));
+      limitZoomOut();
+      map.on("resize", limitZoomOut);
 
       // Esri's muted light-gray basemap (no API key), with its label layer on top.
       const esri = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas";
