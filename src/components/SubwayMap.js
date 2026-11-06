@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { bulletSrc } from "@/lib/bullets";
 
@@ -60,7 +60,13 @@ function stationPopupHtml(s) {
 
 export default function SubwayMap({ stops, segments, transfers, boroughs }) {
   const containerRef = useRef(null);
+  // { L, map, renderer } once the map has been created in the browser.
+  const [leaflet, setLeaflet] = useState(null);
+  // The first network sets the initial view. Later ones (proposed lines
+  // toggled on/off) are redrawn in place, keeping the user's pan and zoom.
+  const initialStops = useRef(stops);
 
+  // Create the map once: view limits, basemap tiles, borough outlines.
   useEffect(() => {
     let map;
     let cancelled = false;
@@ -68,12 +74,6 @@ export default function SubwayMap({ stops, segments, transfers, boroughs }) {
     // Leaflet touches `window` on import, so load it only in the browser.
     import("leaflet").then(({ default: L }) => {
       if (cancelled || !containerRef.current) return;
-
-      const byId = new Map(stops.map((s) => [s.id, s]));
-      const latLngOf = (id) => {
-        const s = byId.get(id);
-        return L.latLng(s.lat, s.lng);
-      };
 
       // Keep the view around NYC: the five boroughs plus a margin of 15% on each side.
       const panBounds = L.geoJSON(boroughs).getBounds().pad(0.15);
@@ -91,7 +91,7 @@ export default function SubwayMap({ stops, segments, transfers, boroughs }) {
       L.control.zoom({ position: "bottomright" }).addTo(map);
       // The map needs a view before canvas layers can be added to it.
       map.fitBounds(
-        L.latLngBounds(stops.map((s) => [s.lat, s.lng])),
+        L.latLngBounds(initialStops.current.map((s) => [s.lat, s.lng])),
         { padding: [24, 24] }
       );
 
@@ -120,107 +120,128 @@ export default function SubwayMap({ stops, segments, transfers, boroughs }) {
         style: { color: "#525252", weight: 1.5, opacity: 0.7, fill: false },
       }).addTo(map);
 
-      // Widest bundle of parallel lines touching each stop, used to size its dot.
-      const lanesAt = new Map();
-      for (const seg of segments) {
-        for (const id of [seg.from, seg.to]) {
-          lanesAt.set(id, Math.max(lanesAt.get(id) ?? 1, seg.colors.length));
-        }
-      }
-
-      // Track: one polyline per color per segment, offset perpendicular to the
-      // segment so routes sharing track run side by side.
-      const lanes = [];
-      for (const seg of segments) {
-        const a = latLngOf(seg.from);
-        const b = latLngOf(seg.to);
-        seg.colors.forEach((color, i) => {
-          const line = L.polyline([a, b], {
-            renderer,
-            color,
-            lineCap: "round",
-            lineJoin: "round",
-            interactive: false,
-          }).addTo(map);
-          lanes.push({ line, a, b, slot: i - (seg.colors.length - 1) / 2 });
-        });
-      }
-
-      // Transfers between stops in the same station: dark outline, white core.
-      const transferLines = transfers.map(([from, to]) => {
-        const pts = [latLngOf(from), latLngOf(to)];
-        const outline = L.polyline(pts, { renderer, color: "#1a1a1a", interactive: false }).addTo(map);
-        const core = L.polyline(pts, { renderer, color: "#ffffff", interactive: false }).addTo(map);
-        return { outline, core };
-      });
-
-      const stopDots = stops.map((s) => {
-        const dot = L.circleMarker([s.lat, s.lng], {
-          renderer,
-          color: "#1a1a1a",
-          fillColor: "#ffffff",
-          fillOpacity: 1,
-        }).addTo(map);
-        dot.bindTooltip(
-          `${nameHtml(s)}${bulletsHtml(s.bullets)}`,
-          { direction: "top", className: "station-tip", opacity: 1 }
-        );
-        dot.bindPopup(stationPopupHtml(s), {
-          className: "station-popup",
-          closeButton: false,
-          autoPanPadding: [24, 24],
-        });
-        // The popup repeats the tooltip's content, so don't show both at once.
-        dot.on("popupopen", () => dot.closeTooltip());
-        return { dot, lanes: lanesAt.get(s.id) ?? 1 };
-      });
-
-      const redraw = () => {
-        const zoom = map.getZoom();
-        const w = lineWeight(zoom);
-
-        for (const { line, a, b, slot } of lanes) {
-          if (slot === 0) {
-            line.setLatLngs([a, b]);
-          } else {
-            const pa = map.project(a, zoom);
-            const pb = map.project(b, zoom);
-            const len = pa.distanceTo(pb) || 1;
-            const nx = (-(pb.y - pa.y) / len) * slot * w;
-            const ny = ((pb.x - pa.x) / len) * slot * w;
-            line.setLatLngs([
-              map.unproject([pa.x + nx, pa.y + ny], zoom),
-              map.unproject([pb.x + nx, pb.y + ny], zoom),
-            ]);
-          }
-          line.setStyle({ weight: w });
-        }
-
-        for (const { outline, core } of transferLines) {
-          outline.setStyle({ weight: w * 1.4 });
-          core.setStyle({ weight: Math.max(1, w * 1.4 - 3) });
-        }
-
-        for (const { dot, lanes: n } of stopDots) {
-          const r = Math.max(w * 0.75, (n * w) / 2);
-          dot.setRadius(r);
-          dot.setStyle({ weight: zoom >= 12 ? 1.5 : 1 });
-          dot.getTooltip().options.offset = [0, -r];
-          // Leaflet's default popup offset is [0, 7]; lift it to the dot's top edge.
-          dot.getPopup().options.offset = [0, 7 - r];
-          if (dot.isPopupOpen()) dot.getPopup().update();
-        }
-      };
-
-      map.on("zoomend", redraw);
-      redraw();
+      setLeaflet({ L, map, renderer });
     });
 
     return () => {
       cancelled = true;
       map?.remove();
     };
-  }, [stops, segments, transfers, boroughs]);
+  }, [boroughs]);
+
+  // Draw the network (track, transfers, stop dots) into one layer group, and
+  // replace the whole group whenever the network changes.
+  useEffect(() => {
+    if (!leaflet) return;
+    const { L, map, renderer } = leaflet;
+    const layers = L.layerGroup().addTo(map);
+
+    const byId = new Map(stops.map((s) => [s.id, s]));
+    const latLngOf = (id) => {
+      const s = byId.get(id);
+      return L.latLng(s.lat, s.lng);
+    };
+
+    // Widest bundle of parallel lines touching each stop, used to size its dot.
+    const lanesAt = new Map();
+    for (const seg of segments) {
+      for (const id of [seg.from, seg.to]) {
+        lanesAt.set(id, Math.max(lanesAt.get(id) ?? 1, seg.colors.length));
+      }
+    }
+
+    // Track: one polyline per color per segment, offset perpendicular to the
+    // segment so routes sharing track run side by side.
+    const lanes = [];
+    for (const seg of segments) {
+      const a = latLngOf(seg.from);
+      const b = latLngOf(seg.to);
+      seg.colors.forEach((color, i) => {
+        const line = L.polyline([a, b], {
+          renderer,
+          color,
+          lineCap: "round",
+          lineJoin: "round",
+          interactive: false,
+        }).addTo(layers);
+        lanes.push({ line, a, b, slot: i - (seg.colors.length - 1) / 2 });
+      });
+    }
+
+    // Transfers between stops in the same station: dark outline, white core.
+    const transferLines = transfers.map(([from, to]) => {
+      const pts = [latLngOf(from), latLngOf(to)];
+      const outline = L.polyline(pts, { renderer, color: "#1a1a1a", interactive: false }).addTo(layers);
+      const core = L.polyline(pts, { renderer, color: "#ffffff", interactive: false }).addTo(layers);
+      return { outline, core };
+    });
+
+    const stopDots = stops.map((s) => {
+      const dot = L.circleMarker([s.lat, s.lng], {
+        renderer,
+        color: "#1a1a1a",
+        fillColor: "#ffffff",
+        fillOpacity: 1,
+      }).addTo(layers);
+      dot.bindTooltip(
+        `${nameHtml(s)}${bulletsHtml(s.bullets)}`,
+        { direction: "top", className: "station-tip", opacity: 1 }
+      );
+      dot.bindPopup(stationPopupHtml(s), {
+        className: "station-popup",
+        closeButton: false,
+        autoPanPadding: [24, 24],
+      });
+      // The popup repeats the tooltip's content, so don't show both at once.
+      dot.on("popupopen", () => dot.closeTooltip());
+      return { dot, lanes: lanesAt.get(s.id) ?? 1 };
+    });
+
+    const redraw = () => {
+      const zoom = map.getZoom();
+      const w = lineWeight(zoom);
+
+      for (const { line, a, b, slot } of lanes) {
+        if (slot === 0) {
+          line.setLatLngs([a, b]);
+        } else {
+          const pa = map.project(a, zoom);
+          const pb = map.project(b, zoom);
+          const len = pa.distanceTo(pb) || 1;
+          const nx = (-(pb.y - pa.y) / len) * slot * w;
+          const ny = ((pb.x - pa.x) / len) * slot * w;
+          line.setLatLngs([
+            map.unproject([pa.x + nx, pa.y + ny], zoom),
+            map.unproject([pb.x + nx, pb.y + ny], zoom),
+          ]);
+        }
+        line.setStyle({ weight: w });
+      }
+
+      for (const { outline, core } of transferLines) {
+        outline.setStyle({ weight: w * 1.4 });
+        core.setStyle({ weight: Math.max(1, w * 1.4 - 3) });
+      }
+
+      for (const { dot, lanes: n } of stopDots) {
+        const r = Math.max(w * 0.75, (n * w) / 2);
+        dot.setRadius(r);
+        dot.setStyle({ weight: zoom >= 12 ? 1.5 : 1 });
+        dot.getTooltip().options.offset = [0, -r];
+        // Leaflet's default popup offset is [0, 7]; lift it to the dot's top edge.
+        dot.getPopup().options.offset = [0, 7 - r];
+        if (dot.isPopupOpen()) dot.getPopup().update();
+      }
+    };
+
+    map.on("zoomend", redraw);
+    redraw();
+
+    return () => {
+      map.off("zoomend", redraw);
+      layers.remove();
+    };
+  }, [leaflet, stops, segments, transfers]);
 
   return <div ref={containerRef} className="h-full w-full" />;
 }

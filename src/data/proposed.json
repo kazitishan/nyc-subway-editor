@@ -1,6 +1,53 @@
 {
     "Second Avenue Subway": {
-
+        "colors": [
+            { "id": "teal", "hex": "#00ADD0" }
+        ],
+        "routes": [
+            {
+                "id": "Q",
+                "paths": [
+                    ["T01", "T02", "T03", "T04", "T05", "T06", "Q05"]
+                ]
+            },
+            {
+                "id": "T",
+                "bullet": "T",
+                "color": "teal",
+                "paths": [
+                    ["T01", "T02", "T03", "T04", "T05", "T06", "Q05", "Q04", "Q03", "T07", "T08", "T09", "T10", "T11", "T12", "T13", "T14", "T15", "T16"]
+                ]
+            }
+        ],
+        "stops": [
+            { "id": "T01", "name": "125 St & Broadway", "borough": "Manhattan", "lat": 40.8158, "lng": -73.9584, "accessibility": "full" },
+            { "id": "T02", "name": "125 St & St. Nicholas Av", "borough": "Manhattan", "lat": 40.8111, "lng": -73.9524, "accessibility": "full" },
+            { "id": "T03", "name": "125 St & Lenox Av", "borough": "Manhattan", "lat": 40.8078, "lng": -73.9459, "accessibility": "full" },
+            { "id": "T04", "name": "125 St & Lexington Av", "borough": "Manhattan", "lat": 40.8042, "lng": -73.9377, "accessibility": "full" },
+            { "id": "T05", "name": "116 St & 2nd Av", "borough": "Manhattan", "lat": 40.7969, "lng": -73.9380, "accessibility": "full" },
+            { "id": "T06", "name": "106 St & 2nd Av", "borough": "Manhattan", "lat": 40.7905, "lng": -73.9426, "accessibility": "full" },
+            { "id": "T07", "name": "55 St", "borough": "Manhattan", "lat": 40.7581, "lng": -73.9658, "accessibility": "full" },
+            { "id": "T08", "name": "42 St", "borough": "Manhattan", "lat": 40.7499, "lng": -73.9722, "accessibility": "full" },
+            { "id": "T09", "name": "34 St", "borough": "Manhattan", "lat": 40.7448, "lng": -73.9759, "accessibility": "full" },
+            { "id": "T10", "name": "23 St", "borough": "Manhattan", "lat": 40.7379, "lng": -73.9809, "accessibility": "full" },
+            { "id": "T11", "name": "14 St", "borough": "Manhattan", "lat": 40.7318, "lng": -73.9852, "accessibility": "full" },
+            { "id": "T12", "name": "Houston St", "borough": "Manhattan", "lat": 40.7237, "lng": -73.9902, "accessibility": "full" },
+            { "id": "T13", "name": "Grand St", "borough": "Manhattan", "lat": 40.7185, "lng": -73.9935, "accessibility": "full" },
+            { "id": "T14", "name": "Chatham Square", "borough": "Manhattan", "lat": 40.7138, "lng": -73.9983, "accessibility": "full" },
+            { "id": "T15", "name": "Seaport", "borough": "Manhattan", "lat": 40.7068, "lng": -74.0036, "accessibility": "full" },
+            { "id": "T16", "name": "Hanover Square", "borough": "Manhattan", "lat": 40.7041, "lng": -74.0089, "accessibility": "full" }
+        ],
+        "stations": [
+            { "id": "306", "stops": ["T01"] },
+            { "id": "153", "stops": ["T02"] },
+            { "id": "439", "stops": ["T03"] },
+            { "id": "392", "stops": ["T04"] },
+            { "id": "612", "stops": ["T07"] },
+            { "id": "610", "stops": ["T08"] },
+            { "id": "118", "stops": ["T11"] },
+            { "id": "232", "stops": ["T12"] },
+            { "id": "231", "stops": ["T13"] }
+        ]
     },
     "Interborough Express (IBX)": {
 

@@ -58,6 +58,17 @@ export function buildNetwork(map) {
   };
 }
 
+// Legend rows: route bullets grouped by line color, in the map's color order.
+// The three shuttles share the S bullet, so bullets are de-duplicated.
+export function buildLegend(map) {
+  return map.colors
+    .map((color) => ({
+      color: color.hex,
+      bullets: [...new Set(map.routes.filter((r) => r.color === color.id).map((r) => r.bullet))],
+    }))
+    .filter((g) => g.bullets.length);
+}
+
 // Stops in the same station are connected in-system. Give each stop the
 // bullets it can transfer to, grouped by the other platform's name (e.g. at
 // Times Sq 1/2/3: N Q R W 7 S at "Times Sq-42 St", A C E at "42 St-Port Authority").

@@ -2,7 +2,7 @@
 
 This document explains how **NYC Subway Editor** is put together: what each file does, how data moves from JSON on disk to colored lines on a map, and the rendering tricks that make shared track, transfers, and station dots look right. It also records the project's current limits and the gotchas worth knowing before you change anything.
 
-> **Status (Nov 2026):** the app is a **read-only viewer** of the current NYC subway. The "editor" part (editing lines, uploading a file, proposed lines) is not built yet. See [Current state and gaps](#current-state-and-gaps).
+> **Status (Nov 2026):** the app is a **viewer** of the current NYC subway that can also overlay **proposed lines**. So far only the Second Avenue Subway (Q extension + new T) has data. Editing and file upload are not built yet. See [Current state and gaps](#current-state-and-gaps).
 
 ---
 
@@ -38,6 +38,7 @@ This document explains how **NYC Subway Editor** is put together: what each file
   - **Hover** a stop: a tooltip with its name, an ADA icon if it is accessible, and the route bullets that stop there.
   - **Click** a stop: a popup with name, borough, accessibility details, trains, and in-station transfers grouped by platform.
   - A collapsible **legend** ("Lines") in the bottom-left with bullets grouped by line color.
+  - A collapsible **Proposed Lines** panel in the top-right. Checking a line merges it into the map: new stops, track, transfers, bullets, and a legend entry. Unchecking removes it again. Your current pan and zoom are kept.
   - Panning is fenced to NYC, and you cannot zoom out past the point where NYC fills the screen.
 
 ---
@@ -73,7 +74,7 @@ nyc-subway-editor/
 ├── eslint.config.mjs      # Next core-web-vitals rules
 ├── public/
 │   ├── 1.png … 7.png      # Route bullet images (numbered lines)
-│   ├── a.png … z.png      # Route bullet images (lettered lines; only the ones in service)
+│   ├── a.png … z.png      # Route bullet images (lettered lines, including t.png for the proposed T)
 │   ├── s.png              # Shared shuttle bullet (GS, FS, H)
 │   ├── sir.png            # Staten Island Railway bullet
 │   └── ada.svg            # Accessibility (ADA) icon, hand-drawn 24×24 SVG
@@ -83,16 +84,18 @@ nyc-subway-editor/
     │   ├── globals.css    # Tailwind import, theme tokens, Leaflet tooltip/popup styles
     │   ├── page.js        # "/" landing page
     │   └── map/
-    │       └── page.js    # "/map" page: builds the network on the server, renders map + header + legend
+    │       └── page.js    # "/map" page: thin server shell that passes the JSON data to <MapView>
     ├── components/
+    │   ├── MapView.js     # Client component: proposal toggles, merge + buildNetwork, header, panel, legend
     │   └── SubwayMap.js   # Client component: all Leaflet drawing and interaction
     ├── lib/
-    │   ├── network.js     # buildNetwork(): map document → { stops, segments, transfers }
+    │   ├── network.js     # buildNetwork(): map document → { stops, segments, transfers }; buildLegend()
+    │   ├── proposals.js   # applyProposals(): base map document + proposal fragments → merged document
     │   └── bullets.js     # bulletSrc(): bullet label → /public image path
     └── data/
         ├── map.json       # THE map document: colors, routes, stations, stops (~145 KB)
         ├── boroughs.json  # GeoJSON FeatureCollection of the 5 borough outlines (~164 KB)
-        └── proposed.json  # Object keyed by proposed line name (6 lines); keys listed as (non-functional) checkboxes on /map
+        └── proposed.json  # Proposed lines keyed by name; each value is a map-document fragment (only SAS filled in)
 ```
 
 `.next/` and `node_modules/` are build output and dependencies. Both are git-ignored.
@@ -108,22 +111,26 @@ A static Server Component. It renders the title, a subtitle, and two actions:
 - **Use Current Subway Map**: a `next/link` to `/map`.
 - **Upload File**: a `<button type="button">` with **no handler**. It is a placeholder for loading a user's own map document.
 
-### `/map` — [src/app/map/page.js](src/app/map/page.js)
+### `/map` — [src/app/map/page.js](src/app/map/page.js) + [src/components/MapView.js](src/components/MapView.js)
 
-A Server Component that:
+**`page.js`** is a thin Server Component. It imports `map.json`, `boroughs.json`, and `proposed.json` (bundled at build time; nothing is fetched at runtime), sets the page title, and renders `<MapView baseMap proposals boroughs />`.
 
-1. Imports `map.json` and `boroughs.json` directly. They are bundled at build time; nothing is fetched at runtime.
-2. Computes `legendGroups` at **module scope** (once per server process or build): for each entry in `map.colors`, in order, it collects the de-duplicated bullets of the routes with that color. Colors with no routes are dropped.
-3. Calls `buildNetwork(subwayMap)` inside the component to get `{ stops, segments, transfers }`.
-4. Renders:
+**`MapView.js`** is a Client Component (`"use client"`) that owns the screen:
+
+1. **State:** `enabled`, a `Set` of the proposal names that are checked. It starts empty, so the map first shows the current subway.
+2. **Derived data** (each in a `useMemo`):
+   - `map = applyProposals(baseMap, enabled proposals)`. Proposals are applied in **file order**, not click order, so the result is deterministic. With nothing checked, `applyProposals` returns `baseMap` itself.
+   - `{ stops, segments, transfers } = buildNetwork(map)`.
+   - `legend = buildLegend(map)`: one row per color that has routes, in `map.colors` order, with de-duplicated bullets.
+3. **Renders:**
    - `<SubwayMap stops segments transfers boroughs />`, which fills the viewport (`h-dvh`).
-   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`subwayMap.stations.length`, which is 445).
-   - A floating **legend** (bottom-left): a native `<details open>` element, so collapsing works without JavaScript. Each row shows a color swatch followed by `next/image` bullets.
-   - A floating **Proposed Lines** panel (top-right, `w-64`): a native `<details>` that starts **collapsed**. Its `+` icon rotates to `×` when open. It has one checkbox per key of `proposed.json` (`Object.keys`, in file order), keyed and labelled by that name. The checkboxes are **uncontrolled** (no React state, no handlers), so the page is still a pure Server Component. Checking one has no effect on the map yet. The panel sits at the top-right corner, clear of the zoom control at the bottom-right.
+   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`map.stations.length`: 445 for the base map, 452 with the Second Avenue Subway on).
+   - A floating **Proposed Lines** panel (top-right, `w-64`): a native `<details>` that starts **collapsed**. Its `+` icon rotates to `×` when open. It has one **controlled** checkbox per key of `proposed.json`, in file order. Toggling a box adds or removes its name in `enabled`. Proposals with an empty `{}` value can be checked but change nothing. The panel sits at the top-right corner, clear of the zoom control at the bottom-right.
+   - A floating **legend** (bottom-left): a native `<details open>`. Each row shows a color swatch followed by `next/image` bullets. It is built from the merged map, so a checked proposal's new routes (e.g. the teal **T**) appear in it.
 
 Overlays use `z-[1000]` so they sit above Leaflet's panes (Leaflet uses z-indexes up to about 800). The header wrapper is `pointer-events-none` and only its inner card is `pointer-events-auto`, so the empty strip across the top still lets you drag the map.
 
-Because nothing on this page is dynamic (no cookies, headers, or params), Next **prerenders it statically** at build time (`.next/server/app/map.html`). `buildNetwork` therefore runs during the build, and its output is serialized into the RSC payload as props for the client `SubwayMap`.
+The page is still **prerendered statically** (no cookies, headers, or params). During prerender `MapView` renders with nothing checked, so `buildNetwork` runs at build time for the initial HTML, then again in the browser on hydration and on every toggle. The raw `map.json`, `proposed.json`, and `boroughs.json` are serialized into the RSC payload as `MapView` props.
 
 ### Root layout — [src/app/layout.js](src/app/layout.js)
 
@@ -136,29 +143,35 @@ Because nothing on this page is dynamic (no cookies, headers, or params), Next *
 ## End-to-end data flow
 
 ```
-                    BUILD / SERVER                                         BROWSER
- ┌──────────────────────────────────────────────────────────┐   ┌──────────────────────────────────────────┐
- │                                                          │   │                                          │
- │  src/data/map.json ──┬──► buildNetwork()  (lib/network)  │   │  SubwayMap ("use client")                │
- │   colors             │      │                            │   │   useEffect → import("leaflet")          │
- │   routes             │      ├─ stops[]   (+ bullets,     │   │     │                                    │
- │   stations           │      │            transfers)      │   │     ├─ L.map (fenced to NYC)             │
- │   stops              │      ├─ segments[] (from,to,     │   │     ├─ Esri tile layers ◄── internet     │
- │                      │      │              colors[])     │──►│     ├─ borough outlines (GeoJSON)        │
- │                      │      └─ transfers[] ([id,id])     │   │     ├─ lane polylines (per seg × color)  │
- │                      │                                   │   │     ├─ transfer polylines (outline+core) │
- │                      └──► legendGroups (module scope)     │   │     ├─ stop circleMarkers                │
- │                              │                           │   │     │    + tooltip / popup HTML           │
- │  src/data/boroughs.json ─────┼───────────────────────────►│   │     └─ redraw() on every zoomend         │
- │                              ▼                           │   │                                          │
- │                     MapPage JSX (header, legend)          │   │  Legend <details> + next/image bullets   │
- │                                                          │   │                                          │
- └──────────────────────────────────────────────────────────┘   └──────────────────────────────────────────┘
+            SERVER / BUILD                                       BROWSER
+ ┌───────────────────────────────┐   ┌───────────────────────────────────────────────────────────────┐
+ │ app/map/page.js               │   │ MapView ("use client")                                        │
+ │                               │   │                                                               │
+ │  map.json      ── baseMap ────┼──►│  enabled: Set<name> ◄── Proposed Lines checkboxes             │
+ │  proposed.json ── proposals ──┼──►│        │                                                      │
+ │  boroughs.json ── boroughs ───┼─┐ │        ▼                                                      │
+ │                               │ │ │  applyProposals(baseMap, checked proposals)  (lib/proposals)  │
+ └───────────────────────────────┘ │ │        │  merged map document                                │
+                                   │ │        ├──► buildLegend()  ──► Legend <details>              │
+                                   │ │        └──► buildNetwork() (lib/network)                      │
+                                   │ │                 │ stops[] (+ bullets, transfers)              │
+                                   │ │                 │ segments[] (from, to, colors[])             │
+                                   │ │                 │ transfers[] ([id, id])                      │
+                                   │ │                 ▼                                             │
+                                   └─┼──────────► SubwayMap ("use client")                           │
+                                     │              effect 1 (once):  import("leaflet"), L.map,      │
+                                     │                 pan fence, Esri tiles ◄── internet,           │
+                                     │                 borough outlines, shared canvas renderer      │
+                                     │              effect 2 (per network): layerGroup of lanes,     │
+                                     │                 transfer connectors, stop dots + tooltip/popup│
+                                     │                 HTML, redraw() on every zoomend               │
+                                     └───────────────────────────────────────────────────────────────┘
 ```
 
 The rule of thumb:
-- **`network.js` is pure data.** It knows nothing about Leaflet or pixels.
+- **`network.js` and `proposals.js` are pure data.** They know nothing about Leaflet, React, or pixels.
 - **`SubwayMap.js` is pure presentation.** It knows nothing about the raw `map.json` format, only the shapes `buildNetwork` returns.
+- **`MapView.js` is the glue.** It holds UI state and turns it into a network.
 
 ---
 
@@ -264,16 +277,51 @@ A GeoJSON `FeatureCollection` with 5 `MultiPolygon` features. Each has `properti
 
 Note: the feature is named `"Bronx"`, but stops use `"The Bronx"`. Nothing joins the two today.
 
-### `proposed.json`
+### `proposed.json` and `applyProposals`
 
-```json
+[src/data/proposed.json](src/data/proposed.json) is an **object keyed by proposed line name**. The key is the label shown in the Proposed Lines panel. Each value is a **fragment of a map document** that [src/lib/proposals.js](src/lib/proposals.js) merges onto `map.json` when the line is checked. Because the result has exactly the `map.json` shape, `buildNetwork`, the legend, and `SubwayMap` need no special cases for proposals.
+
+```jsonc
 {
-  "Second Avenue Subway": {}, "Interborough Express (IBX)": {}, "Queenslink": {},
-  "Utica Avenue Extension": {}, "Nostrand Avenue Extension": {}, "Redhook Extension": {}
+  "Second Avenue Subway": {
+    "colors":   [{ "id": "teal", "hex": "#00ADD0" }],
+    "routes":   [
+      { "id": "Q", "paths": [["T01", ..., "T06", "Q05"]] },                        // existing id → extends the Q
+      { "id": "T", "bullet": "T", "color": "teal", "paths": [["T01", ..., "T16"]] } // new id → new route
+    ],
+    "stops":    [{ "id": "T01", "name": "125 St & Broadway", "borough": "Manhattan",
+                   "lat": 40.8158, "lng": -73.9584, "accessibility": "full" }, ...],
+    "stations": [{ "id": "610", "stops": ["T08"] }, ...]                               // join existing complexes
+  },
+  "Interborough Express (IBX)": {}, "Queenslink": {}, "Utica Avenue Extension": {},
+  "Nostrand Avenue Extension": {}, "Redhook Extension": {}
 }
 ```
 
-An **object keyed by line name**. The values are empty objects for now, presumably to hold each line's details later. Only the keys are used. `map/page.js` lists them as checkboxes in the **Proposed Lines** panel (top-right, collapsed by default). The checkboxes are uncontrolled and do nothing yet. They are placeholders for a future proposed-lines feature.
+**Merge rules** (`applyProposals(base, proposals[])`). Every field is optional, and `{}` changes nothing.
+
+| Field | Rule |
+|---|---|
+| `colors` | Appended after the base colors, skipping ids that already exist. Appending puts new colors **last** in lane order and legend order. |
+| `routes` | **New id** → added as a new route. **Existing id** → its `paths` are **added** to that route. This is how a proposal extends an existing line. |
+| `stops` | New stops only (an existing id is skipped). **No `routes` field**: see the service rule below. `accessibility` defaults to `"none"`. |
+| `stations` | **Existing id** → the listed stops join that station, which creates in-system transfers and connectors. **New id** → a new station. |
+| Service rule | Every stop on a proposal route's paths gets that route id added to its `routes`. Proposal paths must therefore list **only the stops the route serves**. This is also how existing stops pick up new bullets (e.g. 72, 86 and 96 St gain the T). |
+| Leftover stops | Any new stop not placed in a station gets a single-stop station of its own (id = stop id). |
+
+The base document is **never mutated**: routes, stations and stops are shallow-copied with fresh `paths`, `stops` and `routes` arrays. With no proposals it returns `base` itself.
+
+Ordering details:
+- Within a proposal, list routes in the order their **bullets should appear** on new stops. The SAS lists `Q` before `T`, so new stops show "Q T".
+- Proposal paths are processed **after** all base routes, so base segments keep their direction (see [Segments](#segments)). Proposal paths should run in the same direction as base routes on shared track to avoid flipping lane sides. The SAS paths run north → south like the Q.
+
+**Second Avenue Subway data:**
+- 16 new stops, `T01`–`T16`, numbered north to south. The `T` prefix is not used by any base stop id. Names and coordinates come from the user-supplied table; the `*` markers on the three western 125 St stations were dropped.
+- The T **reuses the existing Q stops** `Q05` (96 St), `Q04` (86 St), and `Q03` (72 St) instead of duplicating them. It skips 63 St–Lexington Av, going straight from 72 St to 55 St.
+- **Q extension:** `T01 → T06 → Q05`, along 125 St then down 2 Av.
+- **Transfers** come from joining existing stations: 125 St/Broadway → `306` (1), St. Nicholas Av → `153` (A B C D), Lenox Av → `439` (2 3), Lexington Av → `392` (4 5 6), 55 St → `612` (E F at Lexington Av/53 St, 6 at 51 St), 42 St → `610` (Grand Central: 4 5 6 7 S), 14 St → `118` (L at 3 Av), Houston St → `232` (F at 2 Av), Grand St → `231` (B D). The LIRR transfer at Grand Central Madison is not modeled because the map has no rail lines.
+- `accessibility: "full"` on every new stop is an **assumption**: the source table had no accessibility column, and new stations are built to ADA standards.
+- With SAS enabled: 452 stations, 512 stops, 521 segments, 57 transfer links (vs. 445 / 496 / 505 / 48).
 
 ### `public/` images
 
@@ -366,20 +414,30 @@ For every station with 2 or more stops, it draws connectors between the platform
 
 ### Lifecycle
 
+The component renders one `<div>` and uses **two effects**:
+
 ```
 mount
- └─ useEffect
-     ├─ import("leaflet")        // dynamic: Leaflet touches `window` when imported, so it can't load on the server
-     │    └─ if unmounted already (cancelled) or no container → bail
-     │    └─ build the map, layers, handlers (below)
-     └─ cleanup: cancelled = true; map?.remove()
+ ├─ effect 1 — create the map            deps: [boroughs]  (runs once in practice)
+ │    import("leaflet")                  // dynamic: Leaflet touches `window` on import, so it can't load on the server
+ │     └─ if unmounted already (cancelled) or no container → bail
+ │     └─ L.map, view limits, tiles, borough outlines, shared canvas renderer
+ │     └─ setLeaflet({ L, map, renderer })
+ │    cleanup: cancelled = true; map?.remove()
+ │
+ └─ effect 2 — draw the network          deps: [leaflet, stops, segments, transfers]
+      if !leaflet → wait
+      L.layerGroup() ← lanes, transfer connectors, stop dots (+ tooltips/popups)
+      map.on("zoomend", redraw); redraw()
+      cleanup: map.off("zoomend", redraw); layerGroup.remove()
 ```
 
 - `leaflet/dist/leaflet.css` is imported statically at the top of the file. CSS is safe to import during SSR.
 - The `cancelled` flag guards against React 19 Strict Mode's mount → unmount → mount in development, and against fast navigation away from the page.
-- Effect dependencies are `[stops, segments, transfers, boroughs]`. They come from server props, so they never change identity during a visit, and the effect runs once.
+- **Toggling a proposed line** gives `SubwayMap` new `stops`, `segments`, and `transfers` arrays. Only effect 2 re-runs: the old layer group is removed (closing any open popup) and a new one is drawn. The map, tiles, and **the user's pan and zoom are kept**.
+- The **initial view** is fitted to the stops from the first render, held in `initialStops` (a ref), so later networks never re-fit the view.
 
-### Map setup (lines 78–112)
+### Map setup (effect 1)
 
 | Setting | Why |
 |---|---|
@@ -399,12 +457,15 @@ mount
 All vector layers share **one `L.canvas` renderer** (`padding: 0.5`, `tolerance: 6`). The 6 px tolerance makes the small stop dots easier to hover and click.
 
 1. **Tiles:** Esri base, then Esri labels.
-2. **Borough outlines:** `#525252`, 1.5 px, 70% opacity, no fill, not interactive.
+2. **Borough outlines:** `#525252`, 1.5 px, 70% opacity, no fill, not interactive. Added in effect 1, before any network layers, so they always sit underneath.
+
+Everything below lives in effect 2's single `L.layerGroup`, which is replaced as a unit when the network changes:
+
 3. **Track lanes:** one `L.polyline` per segment per color, not interactive.
 4. **Transfer connectors:** for each link, a dark `#1a1a1a` "outline" polyline with a white "core" polyline on top. Not interactive.
 5. **Stop dots:** `L.circleMarker`, white fill, `#1a1a1a` stroke. These are the **only interactive** layers.
 
-### Parallel lanes (lines 131–147, 182–197)
+### Parallel lanes (effect 2)
 
 For a segment with `n` colors, color `i` gets the **slot** `i − (n − 1) / 2`:
 
@@ -424,7 +485,7 @@ line     = [unproject(pa + n), unproject(pb + n)]  // back to lat/lng
 
 The offset equals one line width per slot, so lanes touch without overlapping at every zoom level. The offset is computed **per segment**, not along the whole route. Where the track bends there can be small seams between adjacent offset segments; the `lineCap/lineJoin: "round"` settings hide most of them.
 
-### Zoom-dependent sizing: `redraw()` (lines 178–213)
+### Zoom-dependent sizing: `redraw()` (effect 2)
 
 `redraw` runs once at start and on every `zoomend`. It does not run continuously during the zoom animation.
 
@@ -439,7 +500,7 @@ The offset equals one line width per slot, so lanes touch without overlapping at
 | Tooltip offset | `[0, −r]`: sits on the dot's top edge |
 | Popup offset | `[0, 7 − r]`: Leaflet's default is `[0, 7]`; this lifts it to the dot's top edge. An open popup is `update()`d so it moves too. |
 
-### Tooltips and popups (lines 10–59, 164–174)
+### Tooltips and popups
 
 Leaflet tooltips and popups take **HTML strings**, so the content is built with template strings. These helpers use plain `<img>` tags, not `next/image`:
 
@@ -460,9 +521,10 @@ Leaflet tooltips and popups take **HTML strings**, so the content is built with 
 ## Legend and route bullets
 
 - [src/lib/bullets.js](src/lib/bullets.js) has one function, `bulletSrc(bullet)`, which returns `/${bullet.toLowerCase()}.png`. Both the legend and the tooltips use it.
-- The **legend** (in `map/page.js`) renders bullets with `next/image` at 20×20, so it gets Next's image optimization. **Tooltips and popups** use raw `<img>` and load the full-size PNGs from `/public`.
+- The **legend** (in `MapView.js`, rows from `buildLegend` in `network.js`) renders bullets with `next/image` at 20×20, so it gets Next's image optimization. **Tooltips and popups** use raw `<img>` and load the full-size PNGs from `/public`.
 - `.route-bullet` in `globals.css` fixes both kinds to `1.25rem` (20 px) square.
 - Because the legend groups by color and de-duplicates bullets, the three shuttles appear as a single **S** on the shuttle-gray row.
+- A proposal's new route needs its bullet image too. The T uses the existing `public/t.png`, and its line color `#00ADD0` was sampled from that image (it is also the MTA's T color).
 
 ---
 
@@ -509,10 +571,10 @@ What exists vs. what the name "Editor" promises:
 |---|---|
 | View current subway map | ✅ Done |
 | Hover / click station info, ADA, transfers | ✅ Done |
-| Legend | ✅ Done |
+| Legend | ✅ Done (includes routes from checked proposals) |
 | **Upload File** button on `/` | ❌ No handler. Intended to load a user-provided map document (same shape as `map.json`). |
-| Editing routes, stops, colors | ❌ Not started. Data is read-only, and there is no client-side state for it. |
-| Proposed lines (`proposed.json`) | 🟡 A UI-only checkbox panel lists the names. Checking a box does nothing yet. |
+| Editing routes, stops, colors | ❌ Not started. The only client-side state is which proposals are checked. |
+| Proposed lines (`proposed.json`) | 🟡 Toggle panel + merge engine work. Only **Second Avenue Subway** has data (Q extension + T line). IBX, Queenslink, Utica, Nostrand, and Red Hook are empty `{}` and do nothing when checked. |
 | Export / save | ❌ None. |
 | Route `name`, map `name` / `description`, station `name` | Present in data, not displayed. |
 | Tests | None. |
@@ -532,7 +594,10 @@ What exists vs. what the name "Editor" promises:
 9. **Overlay z-index:** anything floating over the map needs `z-index > ~800` (the project uses `1000`), or Leaflet panes will cover it.
 10. **The borough name mismatch** (`"The Bronx"` in stops vs `"Bronx"` in GeoJSON) is harmless today but will bite any feature that joins the two.
 11. **Offsets update only on `zoomend`.** During the zoom animation, lanes are scaled with the old offsets, then snap into place. This is expected.
-12. **Big payload:** the full stops, segments, and transfers arrays (built from about 145 KB of JSON) are serialized into the page's RSC payload, and `boroughs.json` (about 164 KB) is serialized as well. If these grow, consider simplifying the GeoJSON further or loading it from `/public`.
+12. **Big payload:** the raw `map.json` (~145 KB), `proposed.json`, and `boroughs.json` (~164 KB) are all serialized into the page's RSC payload as `MapView` props. If these grow, consider simplifying the GeoJSON further or loading it from `/public`.
+13. **Proposal paths must list only the stops served** (see the service rule in [`proposed.json`](#proposedjson-and-applyproposals)). Putting a stop in a proposal path adds that route's bullet to the stop, even if it's an existing stop.
+14. **Proposal stop ids must not collide** with base stop ids (or each other). A duplicate id is silently skipped, and the route's path would then point at the existing stop. SAS uses `T01`–`T16`; pick a distinct prefix for each new proposal.
+15. **Proposals are applied in file order**, so a later proposal can extend routes, stops, or stations added by an earlier one, but not the other way round.
 
 ---
 
@@ -554,13 +619,21 @@ What exists vs. what the name "Editor" promises:
 ### Make the network come from somewhere other than the bundled file
 
 `buildNetwork` only needs an object with the `map.json` shape. A future upload or editor flow could:
-- Parse and validate the uploaded JSON on the client, then call `buildNetwork` in the browser. It is pure, with no Node APIs. Then pass the result to `<SubwayMap>`.
-- Note that `SubwayMap`'s effect tears the map down and rebuilds it whenever any prop's identity changes. That is fine for an upload. For live editing, consider updating Leaflet layers in place instead of recreating the map.
+- Parse and validate the uploaded JSON on the client, then call `buildNetwork` in the browser. It is pure, with no Node APIs. Then pass the result to `<SubwayMap>`. (`MapView` already does this for base + proposals; an upload could simply replace `baseMap`.)
+- `SubwayMap` keeps the map and only redraws its network layer group when `stops`, `segments`, or `transfers` change, so swapping in a new network keeps the view. For very frequent live edits, consider updating individual Leaflet layers instead of redrawing the whole group.
 - Escape all strings from user data before they reach the tooltip and popup HTML (see gotcha 7).
 
-### Use `proposed.json`
+### Add a proposed line
 
-Fill each line's (currently empty) object with the same fields as a route (`color`, `paths`, and probably new stops) and either merge it into the network before `buildNetwork` or render it as a separate, toggleable layer.
+Fill in (or add) its entry in `proposed.json` using the [merge rules](#proposedjson-and-applyproposals):
+
+1. If it is a new service, add a color to `colors` and a route with `id`, `bullet`, `color`, and `paths`. Add `public/<bullet>.png` if that bullet doesn't exist yet.
+2. To extend an existing service, add a route with only the existing `id` and the new `paths`. Each path must connect to an existing stop so the line joins up (e.g. the Q extension ends at `Q05`).
+3. Add new stops with a unique id prefix. Leave out `routes`; they come from the paths.
+4. For transfers, add `{ "id": "<existing station id>", "stops": [<new stop ids>] }` to `stations`. Find station ids by searching `map.json` for the stop you want to connect to.
+5. Reuse existing stop ids in paths where the proposal serves an existing station, instead of creating duplicates.
+
+No code changes are needed: the panel lists the key, and the merged line appears on the map and in the legend when checked.
 
 ---
 

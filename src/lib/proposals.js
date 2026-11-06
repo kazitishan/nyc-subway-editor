@@ -1,0 +1,80 @@
+// Proposed lines (src/data/proposed.json) are keyed by line name. Each one is a
+// fragment of a map document that applyProposals() layers on top of the base
+// map, returning a new document of the same shape for buildNetwork(). The base
+// document is never mutated.
+//
+// Proposal shape (every field optional, so an empty {} is a no-op):
+//   colors:   [{ id, hex }]       – appended after the base colors (so lanes/legend sort after them)
+//   routes:   [{ id, bullet?, name?, color?, paths }]
+//               new id      → a new route
+//               existing id → its paths are added to that route (e.g. extending the Q)
+//   stops:    [{ id, name, borough, lat, lng, accessibility, accessibilityNote? }]
+//               new stops; no `routes` needed (see below)
+//   stations: [{ id, name?, stops }]
+//               existing id → the stops join that station (in-system transfers)
+//               new id      → a new station
+//             New stops left out of every station get a station of their own.
+//
+// A proposal route serves every stop on its paths, so stops pick up the route's
+// bullet automatically, including existing stops (e.g. 96 St gains the T).
+export function applyProposals(base, proposals) {
+  if (!proposals.length) return base;
+
+  const colors = [...base.colors];
+  const routes = base.routes.map((r) => ({ ...r, paths: [...r.paths] }));
+  const stations = base.stations.map((s) => ({ ...s, stops: [...s.stops] }));
+  const stops = base.stops.map((s) => ({ ...s, routes: [...s.routes] }));
+
+  const colorIds = new Set(colors.map((c) => c.id));
+  const routeById = new Map(routes.map((r) => [r.id, r]));
+  const stationById = new Map(stations.map((s) => [s.id, s]));
+  const stopById = new Map(stops.map((s) => [s.id, s]));
+
+  for (const p of proposals) {
+    for (const c of p.colors ?? []) {
+      if (colorIds.has(c.id)) continue;
+      colors.push(c);
+      colorIds.add(c.id);
+    }
+
+    for (const s of p.stops ?? []) {
+      if (stopById.has(s.id)) continue;
+      const stop = { accessibility: "none", ...s, routes: [] };
+      stops.push(stop);
+      stopById.set(stop.id, stop);
+    }
+
+    for (const st of p.stations ?? []) {
+      const existing = stationById.get(st.id);
+      if (existing) {
+        existing.stops.push(...st.stops.filter((id) => !existing.stops.includes(id)));
+      } else {
+        const station = { ...st, stops: [...st.stops] };
+        stations.push(station);
+        stationById.set(station.id, station);
+      }
+    }
+
+    for (const r of p.routes ?? []) {
+      const existing = routeById.get(r.id);
+      if (existing) {
+        existing.paths.push(...r.paths);
+      } else {
+        const route = { ...r, paths: [...r.paths] };
+        routes.push(route);
+        routeById.set(route.id, route);
+      }
+      for (const id of r.paths.flat()) {
+        const stop = stopById.get(id);
+        if (stop && !stop.routes.includes(r.id)) stop.routes.push(r.id);
+      }
+    }
+  }
+
+  const placed = new Set(stations.flatMap((s) => s.stops));
+  for (const s of stops) {
+    if (!placed.has(s.id)) stations.push({ id: s.id, name: s.name, stops: [s.id] });
+  }
+
+  return { ...base, colors, routes, stations, stops };
+}
