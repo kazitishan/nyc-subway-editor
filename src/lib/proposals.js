@@ -15,6 +15,9 @@
 //               new id      → a new station
 //               listing a stop that's already in another station merges
 //               that station in (e.g. joining Livonia Av and Junius St)
+//             Station stop ids may point at another proposal's stops: they're
+//             dropped while that proposal is off (so cross-proposal transfers
+//             only appear when both lines are on).
 //             New stops left out of every station get a station of their own.
 //
 // A proposal route serves every stop on its paths, so stops pick up the route's
@@ -84,10 +87,18 @@ export function applyProposals(base, proposals) {
     }
   }
 
-  const placed = new Set(stations.flatMap((s) => s.stops));
-  for (const s of stops) {
-    if (!placed.has(s.id)) stations.push({ id: s.id, name: s.name, stops: [s.id] });
+  // Drop stop ids that don't exist, e.g. a transfer to another proposal's stop
+  // while that proposal is switched off, and any station left with no stops.
+  const merged = [];
+  for (const st of stations) {
+    st.stops = st.stops.filter((id) => stopById.has(id));
+    if (st.stops.length) merged.push(st);
   }
 
-  return { ...base, colors, routes, stations, stops };
+  const placed = new Set(merged.flatMap((s) => s.stops));
+  for (const s of stops) {
+    if (!placed.has(s.id)) merged.push({ id: s.id, name: s.name, stops: [s.id] });
+  }
+
+  return { ...base, colors, routes, stations: merged, stops };
 }

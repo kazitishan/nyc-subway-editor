@@ -103,7 +103,26 @@
 
     },
     "Utica Avenue Extension": {
-
+        "routes": [
+            {
+                "id": "4",
+                "paths": [
+                    ["250", "U01", "U02", "U03", "U04", "U05", "U06", "U07"]
+                ]
+            }
+        ],
+        "stops": [
+            { "id": "U01", "name": "Rutland Rd–Winthrop St", "borough": "Brooklyn", "lat": 40.6596, "lng": -73.9312, "accessibility": "full" },
+            { "id": "U02", "name": "Church Av", "borough": "Brooklyn", "lat": 40.6520, "lng": -73.9305, "accessibility": "full" },
+            { "id": "U03", "name": "Clarendon Rd–Av D", "borough": "Brooklyn", "lat": 40.6436, "lng": -73.9296, "accessibility": "full" },
+            { "id": "U04", "name": "Kings Highway–Av H", "borough": "Brooklyn", "lat": 40.6342, "lng": -73.9287, "accessibility": "full" },
+            { "id": "U05", "name": "Flatlands Av–Av K", "borough": "Brooklyn", "lat": 40.6263, "lng": -73.9276, "accessibility": "full" },
+            { "id": "U06", "name": "Av N", "borough": "Brooklyn", "lat": 40.6185, "lng": -73.9268, "accessibility": "full" },
+            { "id": "U07", "name": "Kings Plaza", "borough": "Brooklyn", "lat": 40.6100, "lng": -73.9225, "accessibility": "full" }
+        ],
+        "stations": [
+            { "id": "U04", "name": "Kings Highway–Av H / Utica Av", "stops": ["U04", "X08"] }
+        ]
     },
     "Nostrand Avenue Extension": {
 
