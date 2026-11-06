@@ -8,6 +8,9 @@ const BOROUGHS = {
   SI: "Staten Island",
 };
 
+// stops.json `ada`: "1" fully accessible, "2" accessible in one direction only, "0" not accessible.
+const ACCESSIBILITY = { 1: "full", 2: "partial" };
+
 // Turns raw stops.json rows plus route paths into what the map draws:
 // stations, track segments (with the line colors running on each), and
 // transfer connectors between stations in the same complex.
@@ -20,7 +23,9 @@ export function buildNetwork(rawStops) {
     routes: s.daytime_routes.split(" ").filter(Boolean),
     borough: BOROUGHS[s.borough] ?? s.borough,
     complexId: s.complex_id,
-    ada: s.ada === "1",
+    accessibility: ACCESSIBILITY[s.ada] ?? null,
+    // Only partially accessible stations have a note, e.g. "Uptown only".
+    accessibilityNote: s.ada_notes ?? null,
   }));
   const byId = new Map(stations.map((s) => [s.id, s]));
   addStationTransfers(stations);

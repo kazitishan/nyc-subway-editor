@@ -48,6 +48,16 @@ body {
   font-weight: 600;
   margin-bottom: 0.375rem;
 }
+.station-tip-name {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.ada-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
 .station-tip-routes {
   display: flex;
   gap: 0.25rem;

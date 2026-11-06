@@ -97,7 +97,8 @@
     "daytime_routes": "N R W",
     "gtfs_latitude": "40.759901",
     "gtfs_longitude": "-73.984139",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Uptown only"
   },
   {
     "gtfs_stop_id": "R16",
@@ -1297,7 +1298,8 @@
     "daytime_routes": "L",
     "gtfs_latitude": "40.688764",
     "gtfs_longitude": "-73.904046",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Manhattan-bound only"
   },
   {
     "gtfs_stop_id": "L21",
@@ -1617,7 +1619,8 @@
     "daytime_routes": "C E",
     "gtfs_latitude": "40.762456",
     "gtfs_longitude": "-73.985984",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Downtown only"
   },
   {
     "gtfs_stop_id": "A27",
@@ -1687,7 +1690,8 @@
     "daytime_routes": "C E",
     "gtfs_latitude": "40.726227",
     "gtfs_longitude": "-74.003739",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Downtown only"
   },
   {
     "gtfs_stop_id": "A34",
@@ -2747,7 +2751,8 @@
     "daytime_routes": "E F",
     "gtfs_latitude": "40.747846",
     "gtfs_longitude": "-73.946",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Manhattan-bound only"
   },
   {
     "gtfs_stop_id": "F11",
@@ -3367,7 +3372,8 @@
     "daytime_routes": "2 3",
     "gtfs_latitude": "40.690545",
     "gtfs_longitude": "-73.985065",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Outbound only"
   },
   {
     "gtfs_stop_id": "234",
@@ -3977,7 +3983,8 @@
     "daytime_routes": "4 5 6",
     "gtfs_latitude": "40.779492",
     "gtfs_longitude": "-73.955589",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Uptown local only"
   },
   {
     "gtfs_stop_id": "627",
@@ -4047,7 +4054,8 @@
     "daytime_routes": "6",
     "gtfs_latitude": "40.74307",
     "gtfs_longitude": "-73.984264",
-    "ada": "2"
+    "ada": "2",
+    "ada_notes": "Downtown only"
   },
   {
     "gtfs_stop_id": "634",

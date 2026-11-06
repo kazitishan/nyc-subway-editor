@@ -14,6 +14,22 @@ const bulletHtml = (route) =>
 const bulletsHtml = (routes) =>
   `<div class="station-tip-routes">${routes.map(bulletHtml).join("")}</div>`;
 
+const accessibilityLabel = (s) =>
+  s.accessibility === "full"
+    ? "Accessible"
+    : s.accessibility === "partial"
+      ? `Accessible: ${s.accessibilityNote ?? "partial"}`
+      : null;
+
+// Station name, followed by the accessibility icon when the station has one.
+const nameHtml = (s) => {
+  const label = accessibilityLabel(s);
+  const icon = label
+    ? `<img class="ada-icon" src="/ada.svg" alt="${label}" title="${label}" width="16" height="16" />`
+    : "";
+  return `<div class="station-tip-name">${s.name}${icon}</div>`;
+};
+
 // Click popup: name, borough, trains stopping here, and in-station transfers.
 // Transfer platforms with a different name (e.g. 42 St-Port Authority at
 // Times Sq) are labelled; same-named ones just list their trains.
@@ -32,8 +48,9 @@ function stationPopupHtml(s) {
       </div>`
     : "";
 
-  return `<div class="station-tip-name">${s.name}</div>
-    <div class="station-popup-borough">${s.borough}</div>
+  const label = accessibilityLabel(s);
+  return `${nameHtml(s)}
+    <div class="station-popup-borough">${s.borough}${label ? ` · ${label}` : ""}</div>
     <div class="station-popup-section">
       <div class="station-popup-label">Trains</div>
       ${bulletsHtml(s.routes)}
@@ -132,7 +149,7 @@ export default function SubwayMap({ stations, segments, transfers, boroughs }) {
           fillOpacity: 1,
         }).addTo(map);
         dot.bindTooltip(
-          `<div class="station-tip-name">${s.name}</div>${bulletsHtml(s.routes)}`,
+          `${nameHtml(s)}${bulletsHtml(s.routes)}`,
           { direction: "top", className: "station-tip", opacity: 1 }
         );
         dot.bindPopup(stationPopupHtml(s), {
