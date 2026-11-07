@@ -134,11 +134,11 @@
             }
         ],
         "stops": [
-            { "id": "V01", "name": "Avenue J", "borough": "Brooklyn", "lat": 40.6252, "lng": -73.9459, "accessibility": "full" },
-            { "id": "V02", "name": "Avenue M", "borough": "Brooklyn", "lat": 40.6178, "lng": -73.9449, "accessibility": "full" },
-            { "id": "V03", "name": "Avenue P", "borough": "Brooklyn", "lat": 40.6103, "lng": -73.9439, "accessibility": "full" },
-            { "id": "V04", "name": "Avenue U", "borough": "Brooklyn", "lat": 40.5979, "lng": -73.9422, "accessibility": "full" },
-            { "id": "V05", "name": "Avenue X", "borough": "Brooklyn", "lat": 40.5905, "lng": -73.9412, "accessibility": "full" },
+            { "id": "V01", "name": "Avenue J", "borough": "Brooklyn", "lat": 40.626776, "lng": -73.946881, "accessibility": "full" },
+            { "id": "V02", "name": "Avenue M", "borough": "Brooklyn", "lat": 40.619615, "lng": -73.945514, "accessibility": "full" },
+            { "id": "V03", "name": "Avenue P", "borough": "Brooklyn", "lat": 40.612022, "lng": -73.944087, "accessibility": "full" },
+            { "id": "V04", "name": "Avenue U", "borough": "Brooklyn", "lat": 40.600421, "lng": -73.941890, "accessibility": "full" },
+            { "id": "V05", "name": "Avenue X", "borough": "Brooklyn", "lat": 40.593816, "lng": -73.940643, "accessibility": "full" },
             { "id": "V06", "name": "Manhattan Beach", "borough": "Brooklyn", "lat": 40.5772, "lng": -73.9395, "accessibility": "full" }
         ]
     },
@@ -155,10 +155,7 @@
             { "id": "K01", "name": "Avenue J", "borough": "Brooklyn", "lat": 40.627318, "lng": -73.941850, "accessibility": "full" },
             { "id": "K02", "name": "Flatlands Av", "borough": "Brooklyn", "lat": 40.621214, "lng": -73.935406, "accessibility": "full" },
             { "id": "K03", "name": "Avenue R", "borough": "Brooklyn", "lat": 40.616303, "lng": -73.929918, "accessibility": "full" },
-            { "id": "K04", "name": "Kings Plaza", "borough": "Brooklyn", "lat": 40.6100, "lng": -73.9225, "accessibility": "full" }
-        ],
-        "stations": [
-            { "id": "K04", "name": "Kings Plaza", "stops": ["K04", "U07"] }
+            { "id": "K04", "name": "Kings Plaza", "borough": "Brooklyn", "lat": 40.6100, "lng": -73.9225, "accessibility": "full", "sameAs": "U07" }
         ]
     },
     "Redhook Extension": {

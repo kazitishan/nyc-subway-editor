@@ -311,6 +311,7 @@ Note: the feature is named `"Bronx"`, but stops use `"The Bronx"`. Nothing joins
 | `stops` | New stops only (an existing id is skipped). **No `routes` field**: see the service rule below. `accessibility` defaults to `"none"`. |
 | `stations` | **Existing id** → the listed stops join that station, which creates in-system transfers and connectors. **New id** → a new station. Listing a stop that **already belongs to another station** merges that whole station in (its id disappears), so two existing stations can be joined into one complex. The IBX uses this at Livonia Av. |
 | Service rule | Every stop on a proposal route's paths gets that route id added to its `routes`. Proposal paths must therefore list **only the stops the route serves**. This is also how existing stops pick up new bullets (e.g. 72, 86 and 96 St gain the T). |
+| `sameAs` (on a stop) | After all proposals are applied, a stop with `"sameAs": "<id>"` is **merged into that stop if it exists**. Its routes are added to the target stop, every path that uses it is rewritten to use the target id, and the stop is removed. The result is one dot serving both lines, not two linked dots. If the target isn't on the map (its proposal is off), the stop stays as it is. Flatbush's Kings Plaza (`K04`) uses `sameAs: "U07"` (Utica's Kings Plaza). Chains (A → B → C) are not resolved. |
 | Missing stop ids | After all proposals are applied, station stop ids that don't exist are dropped, and stations left empty are removed. This lets a proposal declare a **transfer to another proposal's stop**: it only appears when both are checked, and it works in either file order. The Utica extension uses this for the IBX. |
 | Leftover stops | Any new stop not placed in a station gets a single-stop station of its own (id = stop id). |
 
@@ -375,9 +376,9 @@ Ordering details:
 **Flatbush Avenue Extension data (5 train):**
 - **No new route or color.** It adds a second path to the existing route `5`: `247 → K01 → … → K04`. `247` is Flatbush Av–Brooklyn College, the 5's current southern terminal, which it shares with the 2. From there the 5 runs southeast along Flatbush Av, while the Nostrand extension takes the 2 south along Nostrand Av. The two branches share no new track.
 - 4 new stops, all in Brooklyn (checked against `boroughs.json`): `K01` Avenue J, `K02` Flatlands Av, `K03` Avenue R, `K04` Kings Plaza. Names and coordinates come from the user-supplied table. `accessibility: "full"` is the same assumption as above. `K01` Avenue J is a different stop from Nostrand's `V01` Avenue J, about 0.4 km away.
-- **Transfers:** the 2 at `247` already exists. The IBX transfer comes from the IBX proposal (`X07` joins station `359`), like Nostrand. Kings Plaza's **4** transfer uses a new station `K04` listing `K04` and Utica's `U07`, so it only takes effect when Utica is also checked (see the missing-id rule).
-- `K04` and `U07` have **identical coordinates**. `buildTransferLinks` skips zero-length links, so no connector is drawn and the two dots overlap. The Flatbush dot is drawn last, so it is the one you hover or click; its popup lists the 4 as a transfer.
-- Counts: Flatbush alone gives 449 stations, 500 stops, 509 segments, 48 transfer links. All six populated proposals give 475 / 550 / 558 / 71.
+- **Transfers:** the 2 at `247` already exists. The IBX transfer comes from the IBX proposal (`X07` joins station `359`), like Nostrand.
+- **Kings Plaza is shared with the Utica extension.** `K04` has `"sameAs": "U07"`. With only Flatbush on, `K04` is the 5's terminal. With Utica also on, `K04` is merged into `U07`: there is a single Kings Plaza dot with bullets **4 5**, the 5's path becomes `… K03 → U07`, and both lines' track runs into the same dot. There is no `stations` entry: the two lines share one stop, so no transfer is needed. (The coordinates were already identical; earlier versions linked two overlapping dots as a transfer instead.)
+- Counts: Flatbush alone gives 449 stations, 500 stops, 509 segments, 48 transfer links. Utica + Flatbush gives 455 / 506 / 516 / 48. All six populated proposals give 475 / 549 / 558 / 71.
 
 ### `public/` images
 
@@ -686,8 +687,9 @@ Fill in (or add) its entry in `proposed.json` using the [merge rules](#proposedj
 1. If it is a new service, add a color to `colors` and a route with `id`, `bullet`, `color`, and `paths`. Add `public/<bullet>.png` if that bullet doesn't exist yet.
 2. To extend an existing service, add a route with only the existing `id` and the new `paths`. Each path must connect to an existing stop so the line joins up (e.g. the Q extension ends at `Q05`).
 3. Add new stops with a unique id prefix. Leave out `routes`; they come from the paths.
-4. For transfers, add `{ "id": "<existing station id>", "stops": [<new stop ids>] }` to `stations`. Find station ids by searching `map.json` for the stop you want to connect to. If the new stop should connect two stations that are separate today, also list a stop from the second station; that station is merged in. To connect to **another proposal's** new stop, create a new station listing both stop ids; it only takes effect when both proposals are on.
-5. Reuse existing stop ids in paths where the proposal serves an existing station, instead of creating duplicates.
+4. If a new stop is **the same station** as another proposal's stop (one stop serving both lines when both are on), give it `"sameAs": "<that stop id>"` instead of a transfer.
+5. For transfers, add `{ "id": "<existing station id>", "stops": [<new stop ids>] }` to `stations`. Find station ids by searching `map.json` for the stop you want to connect to. If the new stop should connect two stations that are separate today, also list a stop from the second station; that station is merged in. To connect to **another proposal's** new stop, create a new station listing both stop ids; it only takes effect when both proposals are on.
+6. Reuse existing stop ids in paths where the proposal serves an existing station, instead of creating duplicates.
 
 No code changes are needed: the panel lists the key, and the merged line appears on the map and in the legend when checked.
 

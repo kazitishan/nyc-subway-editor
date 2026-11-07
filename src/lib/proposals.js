@@ -8,8 +8,10 @@
 //   routes:   [{ id, bullet?, name?, color?, paths }]
 //               new id      → a new route
 //               existing id → its paths are added to that route (e.g. extending the Q)
-//   stops:    [{ id, name, borough, lat, lng, accessibility, accessibilityNote? }]
+//   stops:    [{ id, name, borough, lat, lng, accessibility, accessibilityNote?, sameAs? }]
 //               new stops; no `routes` needed (see below)
+//               sameAs: another stop id (usually another proposal's); when that
+//               stop is on the map, this one is merged into it (one dot, both lines)
 //   stations: [{ id, name?, stops }]
 //               existing id → the stops join that station (in-system transfers)
 //               new id      → a new station
@@ -85,6 +87,20 @@ export function applyProposals(base, proposals) {
         if (stop && !stop.routes.includes(r.id)) stop.routes.push(r.id);
       }
     }
+  }
+
+  // A stop with `sameAs` becomes that stop when it exists (e.g. Flatbush's
+  // Kings Plaza merges into Utica's when both lines are on): its routes and
+  // its places in every path move to the other stop, and it disappears.
+  for (const s of [...stops]) {
+    const target = s.sameAs && stopById.get(s.sameAs);
+    if (!target || target === s) continue;
+    for (const r of s.routes) if (!target.routes.includes(r)) target.routes.push(r);
+    for (const route of routes) {
+      route.paths = route.paths.map((path) => path.map((id) => (id === s.id ? target.id : id)));
+    }
+    stops.splice(stops.indexOf(s), 1);
+    stopById.delete(s.id);
   }
 
   // Drop stop ids that don't exist, e.g. a transfer to another proposal's stop
