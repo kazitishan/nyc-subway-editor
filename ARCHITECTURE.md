@@ -2,7 +2,7 @@
 
 This document explains how **NYC Subway Editor** is put together: what each file does, how data moves from JSON on disk to colored lines on a map, and the rendering tricks that make shared track, transfers, and station dots look right. It also records the project's current limits and the gotchas worth knowing before you change anything.
 
-> **Status (Nov 2026):** the app is a **viewer** of the current NYC subway that can also overlay **proposed lines**. So far the Second Avenue Subway (Q extension + new T), the Interborough Express (IBX), the Utica Avenue 4 extension, the Red Hook W extension, and the Nostrand Avenue 2 extension have data. Only Queenslink is still empty. Editing and file upload are not built yet. See [Current state and gaps](#current-state-and-gaps).
+> **Status (Nov 2026):** the app is a **viewer** of the current NYC subway that can also overlay **proposed lines**. So far the Second Avenue Subway (Q extension + new T), the Interborough Express (IBX), the Utica Avenue 4 extension, the Red Hook W extension, the Nostrand Avenue 2 extension, and the Flatbush Avenue 5 extension have data. Only Queenslink is still empty. Editing and file upload are not built yet. See [Current state and gaps](#current-state-and-gaps).
 
 ---
 
@@ -124,7 +124,7 @@ A static Server Component. It renders the title, a subtitle, and two actions:
    - `legend = buildLegend(map)`: one row per color that has routes, in `map.colors` order, with de-duplicated bullets.
 3. **Renders:**
    - `<SubwayMap stops segments transfers boroughs />`, which fills the viewport (`h-dvh`).
-   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`map.stations.length`: 445 for the base map, 452 with the Second Avenue Subway on, 450 with the IBX on, 452 with the Utica extension on, 448 with Red Hook on, 451 with Nostrand on, 472 with all five).
+   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`map.stations.length`: 445 for the base map, 452 with the Second Avenue Subway on, 450 with the IBX on, 452 with the Utica extension on, 448 with Red Hook on, 451 with Nostrand on, 449 with Flatbush on, 475 with all six).
    - A floating **Proposed Lines** panel (top-right, `w-64`): a native `<details>` that starts **collapsed**. Its `+` icon rotates to `×` when open. It has one **controlled** checkbox per key of `proposed.json`, in file order. Toggling a box adds or removes its name in `enabled`. Proposals with an empty `{}` value can be checked but change nothing. The panel sits at the top-right corner, clear of the zoom control at the bottom-right.
    - A floating **legend** (bottom-left): a native `<details open>`. Each row shows a color swatch followed by `next/image` bullets. It is built from the merged map, so a checked proposal's new routes (e.g. the teal **T** and the pink **IBX**) appear in it.
 
@@ -297,6 +297,7 @@ Note: the feature is named `"Bronx"`, but stops use `"The Bronx"`. Nothing joins
   "Utica Avenue Extension": { /* extends route 4 from 250, stops U01–U07 */ },
   "Redhook Extension":      { /* extends route W from R27, stops W01–W03 */ },
   "Nostrand Avenue Extension": { /* extends route 2 from 247, stops V01–V06 */ },
+  "Flatbush Avenue Extension": { /* extends route 5 from 247, stops K01–K04 */ },
   "Queenslink": {}
 }
 ```
@@ -370,6 +371,13 @@ Ordering details:
 - **No `stations` entries needed.** The 5 already stops at `247`. The IBX transfer (Flatbush Av–Nostrand Av) comes from the IBX proposal, which joins `X07` to station `359` (the station holding `247`). So it appears automatically whenever the IBX is also checked.
 - The extension is a single red lane (the 2 alone). It shares no track with other routes.
 - Counts: Nostrand alone gives 451 stations, 502 stops, 511 segments, 48 transfer links. All five populated proposals give 472 / 546 / 554 / 71.
+
+**Flatbush Avenue Extension data (5 train):**
+- **No new route or color.** It adds a second path to the existing route `5`: `247 → K01 → … → K04`. `247` is Flatbush Av–Brooklyn College, the 5's current southern terminal, which it shares with the 2. From there the 5 runs southeast along Flatbush Av, while the Nostrand extension takes the 2 south along Nostrand Av. The two branches share no new track.
+- 4 new stops, all in Brooklyn (checked against `boroughs.json`): `K01` Avenue J, `K02` Flatlands Av, `K03` Avenue R, `K04` Kings Plaza. Names and coordinates come from the user-supplied table. `accessibility: "full"` is the same assumption as above. `K01` Avenue J is a different stop from Nostrand's `V01` Avenue J, about 0.4 km away.
+- **Transfers:** the 2 at `247` already exists. The IBX transfer comes from the IBX proposal (`X07` joins station `359`), like Nostrand. Kings Plaza's **4** transfer uses a new station `K04` listing `K04` and Utica's `U07`, so it only takes effect when Utica is also checked (see the missing-id rule).
+- `K04` and `U07` have **identical coordinates**. `buildTransferLinks` skips zero-length links, so no connector is drawn and the two dots overlap. The Flatbush dot is drawn last, so it is the one you hover or click; its popup lists the 4 as a transfer.
+- Counts: Flatbush alone gives 449 stations, 500 stops, 509 segments, 48 transfer links. All six populated proposals give 475 / 550 / 558 / 71.
 
 ### `public/` images
 
@@ -622,7 +630,7 @@ What exists vs. what the name "Editor" promises:
 | Legend | ✅ Done (includes routes from checked proposals) |
 | **Upload File** button on `/` | ❌ No handler. Intended to load a user-provided map document (same shape as `map.json`). |
 | Editing routes, stops, colors | ❌ Not started. The only client-side state is which proposals are checked. |
-| Proposed lines (`proposed.json`) | 🟡 Toggle panel + merge engine work. **Second Avenue Subway** (Q extension + T), **IBX**, **Utica Avenue Extension** (4), **Redhook Extension** (W), and **Nostrand Avenue Extension** (2) have data. Only Queenslink is still an empty `{}` and does nothing when checked. |
+| Proposed lines (`proposed.json`) | 🟡 Toggle panel + merge engine work. **Second Avenue Subway** (Q extension + T), **IBX**, **Utica Avenue Extension** (4), **Redhook Extension** (W), **Nostrand Avenue Extension** (2), and **Flatbush Avenue Extension** (5) have data. Only Queenslink is still an empty `{}` and does nothing when checked. |
 | Export / save | ❌ None. |
 | Route `name`, map `name` / `description`, station `name` | Present in data, not displayed. |
 | Tests | None. |
@@ -644,7 +652,7 @@ What exists vs. what the name "Editor" promises:
 11. **Offsets update only on `zoomend`.** During the zoom animation, lanes are scaled with the old offsets, then snap into place. This is expected.
 12. **Big payload:** the raw `map.json` (~145 KB), `proposed.json`, and `boroughs.json` (~164 KB) are all serialized into the page's RSC payload as `MapView` props. If these grow, consider simplifying the GeoJSON further or loading it from `/public`.
 13. **Proposal paths must list only the stops served** (see the service rule in [`proposed.json`](#proposedjson-and-applyproposals)). Putting a stop in a proposal path adds that route's bullet to the stop, even if it's an existing stop.
-14. **Proposal stop ids must not collide** with base stop ids (or each other). A duplicate id is silently skipped, and the route's path would then point at the existing stop. SAS uses `T01`–`T16`, IBX `X01`–`X18`, Utica `U01`–`U07`, Red Hook `W01`–`W03`, and Nostrand `V01`–`V06` (`N` is taken by base stops); pick a distinct prefix for each new proposal.
+14. **Proposal stop ids must not collide** with base stop ids (or each other). A duplicate id is silently skipped, and the route's path would then point at the existing stop. SAS uses `T01`–`T16`, IBX `X01`–`X18`, Utica `U01`–`U07`, Red Hook `W01`–`W03`, Nostrand `V01`–`V06` (`N` is taken by base stops), and Flatbush `K01`–`K04`; pick a distinct prefix for each new proposal.
 15. **Proposals are applied in file order**, so a later proposal can extend routes, stops, or stations added by an earlier one, but not the other way round.
 
 ---

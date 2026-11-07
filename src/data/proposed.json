@@ -142,6 +142,25 @@
             { "id": "V06", "name": "Manhattan Beach", "borough": "Brooklyn", "lat": 40.5772, "lng": -73.9395, "accessibility": "full" }
         ]
     },
+    "Flatbush Avenue Extension": {
+        "routes": [
+            {
+                "id": "5",
+                "paths": [
+                    ["247", "K01", "K02", "K03", "K04"]
+                ]
+            }
+        ],
+        "stops": [
+            { "id": "K01", "name": "Avenue J", "borough": "Brooklyn", "lat": 40.627318, "lng": -73.941850, "accessibility": "full" },
+            { "id": "K02", "name": "Flatlands Av", "borough": "Brooklyn", "lat": 40.621214, "lng": -73.935406, "accessibility": "full" },
+            { "id": "K03", "name": "Avenue R", "borough": "Brooklyn", "lat": 40.616303, "lng": -73.929918, "accessibility": "full" },
+            { "id": "K04", "name": "Kings Plaza", "borough": "Brooklyn", "lat": 40.6100, "lng": -73.9225, "accessibility": "full" }
+        ],
+        "stations": [
+            { "id": "K04", "name": "Kings Plaza", "stops": ["K04", "U07"] }
+        ]
+    },
     "Redhook Extension": {
         "routes": [
             {
