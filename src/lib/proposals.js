@@ -8,6 +8,8 @@
 //   routes:   [{ id, bullet?, name?, color?, paths }]
 //               new id      → a new route
 //               existing id → its paths are added to that route (e.g. extending the Q)
+//               infill: [[a, ...newStops, b]] inserts stops between two stops that
+//               are already adjacent on the route (e.g. a new 7 stop at 10 Av)
 //   stops:    [{ id, name, borough, lat, lng, accessibility, accessibilityNote?, sameAs? }]
 //               new stops; no `routes` needed (see below)
 //               sameAs: another stop id (usually another proposal's); when that
@@ -74,15 +76,17 @@ export function applyProposals(base, proposals) {
     }
 
     for (const r of p.routes ?? []) {
-      const existing = routeById.get(r.id);
-      if (existing) {
-        existing.paths.push(...r.paths);
+      const { infill = [], paths = [], ...fields } = r;
+      let route = routeById.get(r.id);
+      if (route) {
+        route.paths.push(...paths);
       } else {
-        const route = { ...r, paths: [...r.paths] };
+        route = { ...fields, paths: [...paths] };
         routes.push(route);
         routeById.set(route.id, route);
       }
-      for (const id of r.paths.flat()) {
+      for (const stretch of infill) insertStops(route, stretch);
+      for (const id of [...paths.flat(), ...infill.flat()]) {
         const stop = stopById.get(id);
         if (stop && !stop.routes.includes(r.id)) stop.routes.push(r.id);
       }
@@ -117,4 +121,22 @@ export function applyProposals(base, proposals) {
   }
 
   return { ...base, colors, routes, stations: merged, stops };
+}
+
+// Infill: [a, ...newStops, b] puts newStops between a and b wherever they are
+// adjacent in one of the route's paths (in either direction), e.g. a new 7
+// stop between Times Sq and 34 St-Hudson Yards. Does nothing if a and b aren't
+// adjacent anywhere.
+function insertStops(route, [a, ...rest]) {
+  const b = rest.pop();
+  route.paths = route.paths.map((path) => {
+    const out = [];
+    path.forEach((id, i) => {
+      out.push(id);
+      const next = path[i + 1];
+      if (id === a && next === b) out.push(...rest);
+      else if (id === b && next === a) out.push(...[...rest].reverse());
+    });
+    return out;
+  });
 }

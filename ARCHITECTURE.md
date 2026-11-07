@@ -2,7 +2,7 @@
 
 This document explains how **NYC Subway Editor** is put together: what each file does, how data moves from JSON on disk to colored lines on a map, and the rendering tricks that make shared track, transfers, and station dots look right. It also records the project's current limits and the gotchas worth knowing before you change anything.
 
-> **Status (Nov 2026):** the app is a **viewer** of the current NYC subway that can also overlay **proposed lines**. So far the Second Avenue Subway (Q extension + new T), the Interborough Express (IBX), the Utica Avenue 4 extension, the Red Hook W extension, the Nostrand Avenue 2 extension, and the Flatbush Avenue 5 extension have data. Only Queenslink is still empty. Editing and file upload are not built yet. See [Current state and gaps](#current-state-and-gaps).
+> **Status (Nov 2026):** the app is a **viewer** of the current NYC subway that can also overlay **proposed lines**. So far the Second Avenue Subway (Q extension + new T), the Interborough Express (IBX), the Utica Avenue 4 extension, the Red Hook W extension, the Nostrand Avenue 2 extension, the Flatbush Avenue 5 extension, and the Tenth Avenue L extension have data. Only Queenslink is still empty. Editing and file upload are not built yet. See [Current state and gaps](#current-state-and-gaps).
 
 ---
 
@@ -124,7 +124,7 @@ A static Server Component. It renders the title, a subtitle, and two actions:
    - `legend = buildLegend(map)`: one row per color that has routes, in `map.colors` order, with de-duplicated bullets.
 3. **Renders:**
    - `<SubwayMap stops segments transfers boroughs />`, which fills the viewport (`h-dvh`).
-   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`map.stations.length`: 445 for the base map, 452 with the Second Avenue Subway on, 450 with the IBX on, 452 with the Utica extension on, 448 with Red Hook on, 451 with Nostrand on, 449 with Flatbush on, 475 with all six).
+   - A floating **header** (top-left): a "← Back" link, the title, and a station count (`map.stations.length`: 445 for the base map, 452 with the Second Avenue Subway on, 450 with the IBX on, 452 with the Utica extension on, 448 with Red Hook on, 451 with Nostrand on, 449 with Flatbush on, 450 with Tenth Avenue on, 480 with all seven).
    - A floating **Proposed Lines** panel (top-right, `w-64`): a native `<details>` that starts **collapsed**. Its `+` icon rotates to `×` when open. It has one **controlled** checkbox per key of `proposed.json`, in file order. Toggling a box adds or removes its name in `enabled`. Proposals with an empty `{}` value can be checked but change nothing. The panel sits at the top-right corner, clear of the zoom control at the bottom-right.
    - A floating **legend** (bottom-left): a native `<details open>`. Each row shows a color swatch followed by `next/image` bullets. It is built from the merged map, so a checked proposal's new routes (e.g. the teal **T** and the pink **IBX**) appear in it.
 
@@ -298,6 +298,7 @@ Note: the feature is named `"Bronx"`, but stops use `"The Bronx"`. Nothing joins
   "Redhook Extension":      { /* extends route W from R27, stops W01–W03 */ },
   "Nostrand Avenue Extension": { /* extends route 2 from 247, stops V01–V06 */ },
   "Flatbush Avenue Extension": { /* extends route 5 from 247, stops K01–K04 */ },
+  "Tenth Avenue Extension": { /* extends route L from 123 (72 St), infills the 7 at Y04, stops Y01–Y06 */ },
   "Queenslink": {}
 }
 ```
@@ -308,6 +309,7 @@ Note: the feature is named `"Bronx"`, but stops use `"The Bronx"`. Nothing joins
 |---|---|
 | `colors` | Appended after the base colors, skipping ids that already exist. Appending puts new colors **last** in lane order and legend order. |
 | `routes` | **New id** → added as a new route. **Existing id** → its `paths` are **added** to that route. This is how a proposal extends an existing line. |
+| `routes[].infill` | `[[a, ...newStops, b]]`: inserts `newStops` between `a` and `b` wherever those two are **adjacent** in one of the route's paths, in either direction (reversed if the path runs `b → a`). The old direct `a–b` segment disappears. If `a` and `b` aren't adjacent anywhere, nothing happens, silently. The inserted stops get the route's bullet (service rule). Tenth Avenue uses this to add a 7 stop at 42 St between Times Sq and Hudson Yards. |
 | `stops` | New stops only (an existing id is skipped). **No `routes` field**: see the service rule below. `accessibility` defaults to `"none"`. |
 | `stations` | **Existing id** → the listed stops join that station, which creates in-system transfers and connectors. **New id** → a new station. Listing a stop that **already belongs to another station** merges that whole station in (its id disappears), so two existing stations can be joined into one complex. The IBX uses this at Livonia Av. |
 | Service rule | Every stop on a proposal route's paths gets that route id added to its `routes`. Proposal paths must therefore list **only the stops the route serves**. This is also how existing stops pick up new bullets (e.g. 72, 86 and 96 St gain the T). |
@@ -379,6 +381,14 @@ Ordering details:
 - **Transfers:** the 2 at `247` already exists. The IBX transfer comes from the IBX proposal (`X07` joins station `359`), like Nostrand.
 - **Kings Plaza is shared with the Utica extension.** `K04` has `"sameAs": "U07"`. With only Flatbush on, `K04` is the 5's terminal. With Utica also on, `K04` is merged into `U07`: there is a single Kings Plaza dot with bullets **4 5**, the 5's path becomes `… K03 → U07`, and both lines' track runs into the same dot. There is no `stations` entry: the two lines share one stop, so no transfer is needed. (The coordinates were already identical; earlier versions linked two overlapping dots as a transfer instead.)
 - Counts: Flatbush alone gives 449 stations, 500 stops, 509 segments, 48 transfer links. Utica + Flatbush gives 455 / 506 / 516 / 48. All six populated proposals give 475 / 549 / 558 / 71.
+
+**Tenth Avenue Extension data (L train, plus a new 7 stop):**
+- **No new route or color.** It adds a second path to the existing route `L`: `123 → Y06 → … → Y01 → L01`. `123` is 72 St on the 1/2/3, the new terminal. `L01` is 8 Av, the L's current western terminal. The path is written **into** `L01`, matching the L's existing direction (8 Av → Canarsie). With the extension on, 72 St shows bullets **1 2 3 L**.
+- 6 new stops, all in Manhattan (checked against `boroughs.json`): `Y01` 10 Av/14 St, `Y02` 23 St, `Y03` 34 St, `Y04` 42 St, `Y05` 50 St, `Y06` 57 St. Coordinates are user-supplied. The names were normalized to the map's MTA style ("23 St", not "23 street"). `accessibility: "full"` is the same assumption as above.
+- **34 St → 7:** `Y03` joins station `471` (34 St–Hudson Yards, `726`), so the two are linked as a transfer.
+- **42 St → 7:** the 7 has no stop there today; it runs straight from `725` (Times Sq) to `726` (Hudson Yards). The proposal's `7` entry uses `"infill": [["725", "Y04", "726"]]`, so with the extension on the 7 path becomes `… 725 → Y04 → 726`. `Y04` is a **single stop served by both the 7 and the L** (bullets "7 L"), consistent with how Kings Plaza is handled. This is a modeling choice: the user asked for a new 7 station with a transfer, and gave no separate 7 coordinates. A separate 7 stop linked as a transfer would also work (new stop + infill it + a `stations` entry).
+- The `7` route entry is listed before `L`, so `Y04`'s bullets read "7 L".
+- Counts: Tenth Avenue alone gives 450 stations, 502 stops, 513 segments, 49 transfer links. All seven populated proposals give 480 / 555 / 566 / 72.
 
 ### `public/` images
 
@@ -631,7 +641,7 @@ What exists vs. what the name "Editor" promises:
 | Legend | ✅ Done (includes routes from checked proposals) |
 | **Upload File** button on `/` | ❌ No handler. Intended to load a user-provided map document (same shape as `map.json`). |
 | Editing routes, stops, colors | ❌ Not started. The only client-side state is which proposals are checked. |
-| Proposed lines (`proposed.json`) | 🟡 Toggle panel + merge engine work. **Second Avenue Subway** (Q extension + T), **IBX**, **Utica Avenue Extension** (4), **Redhook Extension** (W), **Nostrand Avenue Extension** (2), and **Flatbush Avenue Extension** (5) have data. Only Queenslink is still an empty `{}` and does nothing when checked. |
+| Proposed lines (`proposed.json`) | 🟡 Toggle panel + merge engine work. **Second Avenue Subway** (Q extension + T), **IBX**, **Utica Avenue Extension** (4), **Redhook Extension** (W), **Nostrand Avenue Extension** (2), **Flatbush Avenue Extension** (5), and **Tenth Avenue Extension** (L, plus a new 7 stop) have data. Only Queenslink is still an empty `{}` and does nothing when checked. |
 | Export / save | ❌ None. |
 | Route `name`, map `name` / `description`, station `name` | Present in data, not displayed. |
 | Tests | None. |
@@ -653,7 +663,7 @@ What exists vs. what the name "Editor" promises:
 11. **Offsets update only on `zoomend`.** During the zoom animation, lanes are scaled with the old offsets, then snap into place. This is expected.
 12. **Big payload:** the raw `map.json` (~145 KB), `proposed.json`, and `boroughs.json` (~164 KB) are all serialized into the page's RSC payload as `MapView` props. If these grow, consider simplifying the GeoJSON further or loading it from `/public`.
 13. **Proposal paths must list only the stops served** (see the service rule in [`proposed.json`](#proposedjson-and-applyproposals)). Putting a stop in a proposal path adds that route's bullet to the stop, even if it's an existing stop.
-14. **Proposal stop ids must not collide** with base stop ids (or each other). A duplicate id is silently skipped, and the route's path would then point at the existing stop. SAS uses `T01`–`T16`, IBX `X01`–`X18`, Utica `U01`–`U07`, Red Hook `W01`–`W03`, Nostrand `V01`–`V06` (`N` is taken by base stops), and Flatbush `K01`–`K04`; pick a distinct prefix for each new proposal.
+14. **Proposal stop ids must not collide** with base stop ids (or each other). A duplicate id is silently skipped, and the route's path would then point at the existing stop. SAS uses `T01`–`T16`, IBX `X01`–`X18`, Utica `U01`–`U07`, Red Hook `W01`–`W03`, Nostrand `V01`–`V06` (`N` is taken by base stops), Flatbush `K01`–`K04`, and Tenth Avenue `Y01`–`Y06`; pick a distinct prefix for each new proposal.
 15. **Proposals are applied in file order**, so a later proposal can extend routes, stops, or stations added by an earlier one, but not the other way round.
 
 ---
@@ -685,11 +695,12 @@ What exists vs. what the name "Editor" promises:
 Fill in (or add) its entry in `proposed.json` using the [merge rules](#proposedjson-and-applyproposals):
 
 1. If it is a new service, add a color to `colors` and a route with `id`, `bullet`, `color`, and `paths`. Add `public/<bullet>.png` if that bullet doesn't exist yet.
-2. To extend an existing service, add a route with only the existing `id` and the new `paths`. Each path must connect to an existing stop so the line joins up (e.g. the Q extension ends at `Q05`).
-3. Add new stops with a unique id prefix. Leave out `routes`; they come from the paths.
-4. If a new stop is **the same station** as another proposal's stop (one stop serving both lines when both are on), give it `"sameAs": "<that stop id>"` instead of a transfer.
-5. For transfers, add `{ "id": "<existing station id>", "stops": [<new stop ids>] }` to `stations`. Find station ids by searching `map.json` for the stop you want to connect to. If the new stop should connect two stations that are separate today, also list a stop from the second station; that station is merged in. To connect to **another proposal's** new stop, create a new station listing both stop ids; it only takes effect when both proposals are on.
-6. Reuse existing stop ids in paths where the proposal serves an existing station, instead of creating duplicates.
+2. To add a stop **in the middle** of an existing service, add a route with the existing `id` and `"infill": [[stopBefore, newStop, stopAfter]]` (the two outer stops must be adjacent today).
+3. To extend an existing service, add a route with only the existing `id` and the new `paths`. Each path must connect to an existing stop so the line joins up (e.g. the Q extension ends at `Q05`).
+4. Add new stops with a unique id prefix. Leave out `routes`; they come from the paths.
+5. If a new stop is **the same station** as another proposal's stop (one stop serving both lines when both are on), give it `"sameAs": "<that stop id>"` instead of a transfer.
+6. For transfers, add `{ "id": "<existing station id>", "stops": [<new stop ids>] }` to `stations`. Find station ids by searching `map.json` for the stop you want to connect to. If the new stop should connect two stations that are separate today, also list a stop from the second station; that station is merged in. To connect to **another proposal's** new stop, create a new station listing both stop ids; it only takes effect when both proposals are on.
+7. Reuse existing stop ids in paths where the proposal serves an existing station, instead of creating duplicates.
 
 No code changes are needed: the panel lists the key, and the merged line appears on the map and in the legend when checked.
 

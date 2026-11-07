@@ -172,5 +172,32 @@
             { "id": "W02", "name": "Atlantic Basin", "borough": "Brooklyn", "lat": 40.6804, "lng": -74.0086, "accessibility": "full" },
             { "id": "W03", "name": "Red Hook", "borough": "Brooklyn", "lat": 40.6746, "lng": -74.0048, "accessibility": "full" }
         ]
+    },
+    "Tenth Avenue Extension": {
+        "routes": [
+            {
+                "id": "7",
+                "infill": [
+                    ["725", "Y04", "726"]
+                ]
+            },
+            {
+                "id": "L",
+                "paths": [
+                    ["123", "Y06", "Y05", "Y04", "Y03", "Y02", "Y01", "L01"]
+                ]
+            }
+        ],
+        "stops": [
+            { "id": "Y01", "name": "10 Av/14 St", "borough": "Manhattan", "lat": 40.742135, "lng": -74.008173, "accessibility": "full" },
+            { "id": "Y02", "name": "23 St", "borough": "Manhattan", "lat": 40.747680, "lng": -74.004171, "accessibility": "full" },
+            { "id": "Y03", "name": "34 St", "borough": "Manhattan", "lat": 40.754575, "lng": -73.999151, "accessibility": "full" },
+            { "id": "Y04", "name": "42 St", "borough": "Manhattan", "lat": 40.759628, "lng": -73.995482, "accessibility": "full" },
+            { "id": "Y05", "name": "50 St", "borough": "Manhattan", "lat": 40.764699, "lng": -73.991784, "accessibility": "full" },
+            { "id": "Y06", "name": "57 St", "borough": "Manhattan", "lat": 40.769116, "lng": -73.988557, "accessibility": "full" }
+        ],
+        "stations": [
+            { "id": "471", "stops": ["Y03"] }
+        ]
     }
 }
